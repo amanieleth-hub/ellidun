@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inquiry | Ellidun Microlot Coffee Export</title>
+
+  <!-- Fonts you already use -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== TOPBAR (same as index) ===== -->
+<div class="topbar">
+  <div class="brand">
+    <img src="logo.png" class="logo-img">
+    <div class="logo-text">Ellidun Microlot Coffee Export</div>
+  </div>
+
+  <div id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="farmers.html">Our Farmers</a>
+    <a href="#">Microlots</a>
+    <a href="contact.html">Inquiry</a>
+  </div>
+
+  <div class="hamburger" id="hamburger">☰</div>
+</div>
+
+
+<!-- ===== INQUIRY SECTION ===== -->
+<section style="padding:160px 20px 100px 20px; max-width:900px; margin:auto;">
+
+  <h1 class="section-title">GET IN TOUCH</h1>
+  <p class="section-sub" style="font-size:26px; margin-bottom:20px;">
+    Start sourcing with us
+  </p>
+
+  <p style="max-width:700px; line-height:1.7; margin-bottom:50px;">
+    Whether you need a 200g sample or a full container, we're here to help you find the right coffee.
+    Our team typically responds within 48 hours.
+  </p>
+
+  <!-- ===== INFO TABLE (rows only) ===== -->
+  <div style="background:#fffdf9; padding:35px 40px; border:1px solid #e6ded2; border-radius:8px; margin-bottom:60px;">
+
+  <!-- ROW 1 -->
+  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #eee;">
+  <div>Samples ship within</div>
+  <div style="font-weight:600; margin-right:auto; padding-left:40px;">
+    5 to 7 days
+  </div>
+</div>
+
+  <!-- ROW 2 -->
+  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #eee;">
+    <div>Full lots available</div>
+    <div style="font-weight:600; text-align:right;">Process & forward</div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #eee;">
+    <div>Minimum sample order</div>
+    <div style="font-weight:600;">200g free</div>
+  </div>
+
+  <!-- ROW 4 -->
+  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0;">
+    <div>Minimum full lot</div>
+    <div style="font-weight:600;">30kg</div>
+  </div>
+
+</div>
+
+
+  <!-- ===== CONTACT FORM ===== -->
+  <form style="display:flex; flex-direction:column; gap:18px; margin-bottom:60px;">
+
+    <input type="text" placeholder="Your Name / Roastery Name" required
+      style="padding:14px; border:1px solid #d8cec2; font-family:Inter;">
+
+    <input type="email" placeholder="Email Address" required
+      style="padding:14px; border:1px solid #d8cec2; font-family:Inter;">
+
+    <input type="text" placeholder="Country"
+      style="padding:14px; border:1px solid #d8cec2; font-family:Inter;">
+
+    <textarea rows="5" placeholder="Tell us what you are looking for (samples, full lots, origins, volume)"
+      style="padding:14px; border:1px solid #d8cec2; font-family:Inter;"></textarea>
+
+    <button type="submit" class="btn-brown" style="width:220px;">
+      Send Inquiry
+    </button>
+
+  </form>
+
+
+  <!-- ===== DIRECT CONTACT ===== -->
+  <div style="text-align:center; margin-top:40px;">
+    <h3 style="margin-bottom:10px;">DIRECT CONTACT</h3>
+    <p style="font-weight:600; font-size:18px;">
+      sourcing@ellidunmicrolots.com.et
+    </p>
+    <p style="opacity:0.7;">Response within 48 hours</p>
+  </div>
+
+</section>
+
+
+<script>
+// Hamburger
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+hamburger.onclick = () =>{
+  navMenu.classList.toggle("show");
+};
+</script>
+
+</body>
+</html>
