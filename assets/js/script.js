@@ -1,110 +1,67 @@
-// ==========================
-// HAMBURGER MENU
-// ==========================
+// ================= HAMBURGER =================
 const hamburger = document.getElementById("hamburger");
 const navMenu = document.getElementById("navMenu");
 
-hamburger.onclick = () => {
-  navMenu.classList.toggle("show");
-};
-
-
-// ==========================
-// FARM CARD SCROLL REVEAL
-// ==========================
-const cards = document.querySelectorAll(".farm-card");
-
-function revealCards(){
-  cards.forEach(card => {
-    if(card.getBoundingClientRect().top < window.innerHeight * 0.85){
-      card.classList.add("show");
-    }
+if (hamburger && navMenu) {
+  hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
   });
 }
 
-
-// ==========================
-// STATS ANIMATION (ONLY ONCE)
-// ==========================
+// ================= SAFE REVEAL SYSTEM =================
+const farmCards = document.querySelectorAll(".farm-card");
+const revealItems = document.querySelectorAll(".reveal");
 const statsSection = document.querySelector(".stats");
 const counters = document.querySelectorAll(".stats h2");
 
 let statsStarted = false;
 
-function animateStats(){
-  counters.forEach(counter => {
-    const target = +counter.getAttribute("data-target");
-    let count = 0;
-    const speed = target / 80;
+// Reveal elements
+function revealOnScroll() {
+  const trigger = window.innerHeight * 0.85;
 
-    function update(){
-      count += speed;
-      if(count < target){
-        counter.innerText = Math.floor(count);
-        requestAnimationFrame(update);
-      } else {
-        counter.innerText = target + "+";
-      }
+  farmCards.forEach(el => {
+    if (el.getBoundingClientRect().top < trigger) {
+      el.classList.add("show");
     }
-
-    update();
   });
-}
 
+  revealItems.forEach(el => {
+    if (el.getBoundingClientRect().top < trigger) {
+      el.classList.add("show");
+    }
+  });
 
-// ==========================
-// MASTER SCROLL HANDLER
-// ==========================
-function onScroll(){
-  revealCards();
+  // stats
+  if (statsSection) {
+    const statsTop = statsSection.getBoundingClientRect().top;
+    if (statsTop < trigger) {
+      statsSection.classList.add("show");
 
-  const statsTop = statsSection.getBoundingClientRect().top;
-  const triggerPoint = window.innerHeight * 0.85;
+      if (!statsStarted) {
+        counters.forEach(counter => {
+          const target = +counter.getAttribute("data-target");
+          let count = 0;
+          const step = target / 80;
 
-  if(statsTop < triggerPoint){
-    statsSection.classList.add("show");
+          function update() {
+            count += step;
+            if (count < target) {
+              counter.innerText = Math.floor(count);
+              requestAnimationFrame(update);
+            } else {
+              counter.innerText = target + "+";
+            }
+          }
 
-    if(!statsStarted){
-      animateStats();
-      statsStarted = true;
+          update();
+        });
+
+        statsStarted = true;
+      }
     }
   }
 }
 
-window.addEventListener("scroll", onScroll);
-function revealOnScroll(){
-  const items = document.querySelectorAll(".reveal");
-
-  items.forEach(el=>{
-    const top = el.getBoundingClientRect().top;
-    if(top < window.innerHeight * 0.85){
-      el.classList.add("show");
-    }
-  });
-}
-// =========================
-// FARMERS REVEAL ON SCROLL
-// =========================
-
-const farmCards = document.querySelectorAll(".farm-card");
-
-function revealFarmers(){
-  farmCards.forEach(card=>{
-    const top = card.getBoundingClientRect().top;
-    if(top < window.innerHeight * 0.85){
-      card.style.opacity = "1";
-      card.style.transform = "translateY(0)";
-    }
-  });
-}
-
-window.addEventListener("scroll", revealFarmers);
-window.addEventListener("load", ()=>{
-  farmCards.forEach(c=>{
-    c.style.opacity = "0";
-    c.style.transform = "translateY(40px)";
-    c.style.transition = "0.8s ease";
-  });
-});
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
