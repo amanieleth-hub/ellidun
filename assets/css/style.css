@@ -269,9 +269,12 @@ section,
   transform:translateY(-6px);
 }
 
-/* ================= HOW IT WORKS ================= */
+/* =========================
+   HOW IT WORKS FIX (FINAL)
+========================= */
+
 .how-it-works{
-  padding:120px 0;
+  padding:120px 70px;
   background:#3d271a;
   color:#fff;
   text-align:center;
@@ -279,17 +282,34 @@ section,
 
 .steps{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
   gap:25px;
   margin-top:50px;
 }
 
+/* IMPORTANT FIX */
 .step{
-  background:rgba(255,255,255,.05);
+  display:block;
+  width:100%;
+  height:100%;
+  background:rgba(255,255,255,0.05);
   padding:25px;
   border-radius:10px;
-  max-width:420px;
-  margin:0 auto;
+  border:1px solid rgba(255,255,255,0.1);
+  box-sizing:border-box;
+
+  /* prevents weird shrink */
+  min-height:180px;
+}
+
+.step h3{
+  margin:10px 0;
+}
+
+.step p{
+  margin:0;
+  line-height:1.6;
+  opacity:0.9;
 }
 
 /* ================= LOTS IMAGE FIX ================= */
