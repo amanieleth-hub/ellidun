@@ -1,8 +1,40 @@
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read: if true;
-    }
-  }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Available Microlots | Ellidun</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- SAME TOPBAR AS INDEX -->
+
+<section class="microlots-section">
+  <h2 class="section-title">Available Microlots</h2>
+  <p class="section-sub">Live inventory directly from our farmers</p>
+
+  <div class="table-wrap">
+    <table id="lotsTable">
+      <thead>
+        <tr>
+          <th>Lot ID</th>
+          <th>Farmer</th>
+          <th>Region</th>
+          <th>Altitude</th>
+          <th>Process</th>
+          <th>Cup Score</th>
+          <th>Cup Notes</th>
+          <th>Qty (kg)</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+<script src="assets/js/lots.js"></script>
+
+
+  
