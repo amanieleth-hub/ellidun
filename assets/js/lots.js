@@ -5,13 +5,13 @@ from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // 🔥 Your Firebase config here
 const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_SENDER",
-  appId: "YOUR_APP_ID"
-};
+      apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
+      authDomain: "ellidun-microlot-coffee.firebaseapp.com",
+      projectId: "ellidun-microlot-coffee",
+      storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
+      messagingSenderId: "286011718104",
+      appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
+    };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
