@@ -86,7 +86,7 @@ function createRow(lot, farmer) {
 async function loadLots() {
   try {
     const q = query(
-      collection(db, "microlots"),
+      collection(db, "microlot"),
       where("status", "==", "available")
     );
 
