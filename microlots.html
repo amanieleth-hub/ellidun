@@ -3,60 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Available Microlots | Ellidun</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <title>Microlots | Ellidun Coffee Export</title>
 
-  <!-- Firebase -->
-  <script type="module" src="assets/js/lot.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- SAME TOPBAR FROM INDEX -->
-  <div class="topbar">
-    <div class="brand">
-      <img src="assets/images/logo.png" class="logo-img">
-      <div class="logo-text">Ellidun Microlot Coffee Export</div>
-    </div>
+<!-- =========================
+     TOP NAVIGATION
+========================= -->
+<header class="topbar">
 
-    <div id="navMenu">
-      <a href="index.html">Home</a>
-      <a href="farmers.html">Our Farmers</a>
-      <a href="microlots.html">Microlots</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
+  <div class="brand">
+    <img src="assets/images/logo.png" class="logo-img"/>
+    <div class="logo-text">Ellidun Microlot Coffee Export</div>
   </div>
 
-  <section class="lots-section">
-    <h2 class="section-title">Available Microlots</h2>
+  <div id="hamburger" class="hamburger">☰</div>
 
-    <div class="lots-table-wrapper">
-      <table id="lotsTable">
-        <thead>
-          <tr>
-            <th>Lot ID</th>
-            <th>Farmer</th>
-            <th>Region</th>
-            <th>Altitude</th>
-            <th>Process</th>
-            <th>Score</th>
-            <th>Cup Notes</th>
-            <th>Qty (kg)</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="lotsBody">
-          <!-- Firebase fills this -->
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <nav id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="farmers.html">Our Farmers</a>
+    <a href="microlot.html">Microlots</a>
+    <a href="aboutus.html">About Us</a>
+    <a href="inquiry.html">Inquiry</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+</header>
+
+
+<!-- =========================
+     PAGE HEADER
+========================= -->
+<section class="lots-section">
+
+  <h2 class="section-title">Available Microlots</h2>
+  <p class="section-sub">Direct trade microlots sourced from Ethiopian farms</p>
+
+  <!-- =========================
+       TABLE
+  ========================== -->
+  <div class="lots-table-wrapper">
+
+    <table class="lots-table">
+
+      <thead>
+        <tr>
+          <th>Lot ID</th>
+          <th>Farmer</th>
+          <th>Region</th>
+          <th>Altitude</th>
+          <th>Process</th>
+          <th>Cup Notes</th>
+          <th>Score</th>
+          <th>Qty (kg)</th>
+          <th>Price ($/kg)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="lotsBody">
+        <!-- Firebase loads data here -->
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SCRIPT
+========================= -->
+<script type="module" src="assets/js/lot.js"></script>
 
 </body>
 </html>
-
-
-
-
