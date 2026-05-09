@@ -5,36 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Available Microlots | Ellidun</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase -->
+  <script type="module" src="lot.js"></script>
 </head>
+
 <body>
 
-<!-- SAME TOPBAR AS INDEX -->
+  <!-- SAME TOPBAR FROM INDEX -->
+  <div class="topbar">
+    <div class="brand">
+      <img src="assets/images/logo.png" class="logo-img">
+      <div class="logo-text">Ellidun Microlot Coffee Export</div>
+    </div>
 
-<section class="microlots-section">
-  <h2 class="section-title">Available Microlots</h2>
-  <p class="section-sub">Live inventory directly from our farmers</p>
-
-  <div class="table-wrap">
-    <table id="lotsTable">
-      <thead>
-        <tr>
-          <th>Lot ID</th>
-          <th>Farmer</th>
-          <th>Region</th>
-          <th>Altitude</th>
-          <th>Process</th>
-          <th>Cup Score</th>
-          <th>Cup Notes</th>
-          <th>Qty (kg)</th>
-          <th>Price</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="farmers.html">Our Farmers</a>
+      <a href="microlots.html">Microlots</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
   </div>
-</section>
-<script src="assets/js/lots.js"></script>
 
+  <section class="lots-section">
+    <h2 class="section-title">Available Microlots</h2>
 
-  
+    <div class="lots-table-wrapper">
+      <table id="lotsTable">
+        <thead>
+          <tr>
+            <th>Lot ID</th>
+            <th>Farmer</th>
+            <th>Region</th>
+            <th>Altitude</th>
+            <th>Process</th>
+            <th>Score</th>
+            <th>Cup Notes</th>
+            <th>Qty (kg)</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="lotsBody">
+          <!-- Firebase fills this -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</body>
+</html>
