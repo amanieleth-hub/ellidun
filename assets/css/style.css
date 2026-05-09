@@ -376,31 +376,31 @@ section,
    MICROLOTS TABLE
 ========================= */
 
-.microlots-section{
+.lots-section{
   padding:160px 24px 100px;
   max-width:1400px;
   margin:0 auto;
 }
 
-.table-wrap{
+.lots-table-wrapper{
   overflow-x:auto;
   margin-top:40px;
   background:#fffdf9;
-  border:1px solid #e6ded2;
   border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
 }
 
 #lotsTable{
   width:100%;
   border-collapse:collapse;
-  min-width:1100px;
+  min-width:1000px;
 }
 
 #lotsTable th,
 #lotsTable td{
   padding:14px 16px;
-  text-align:left;
   border-bottom:1px solid #e6ded2;
+  text-align:left;
   font-size:14px;
 }
 
@@ -413,13 +413,7 @@ section,
   background:#faf6f0;
 }
 
-.farmer-link{
-  color:#7a5c45;
-  font-weight:600;
-  text-decoration:none;
-}
-
-.inquire-btn{
+.lot-action{
   background:#7a5c45;
   color:white;
   padding:8px 14px;
