@@ -1,37 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Available Lots</title>
-
-<link href="style.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Microlot</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+<body style="padding:60px 24px; max-width:700px; margin:auto;">
 
-<body>
+  <h2>Create New Microlot</h2>
 
-<header class="topbar">
-  <div class="brand">
-    <img src="logo.png" class="logo-img"/>
-    <div class="logo-text">Ellidun Microlot Coffee Export</div>
-  </div>
+  <form id="lot-form" class="lot-form">
+    <input type="text" id="farm" placeholder="Farm / Farmer name" required>
+    <input type="text" id="process" placeholder="Process (Washed / Natural / Honey)" required>
+    <input type="number" id="cupping" placeholder="Cupping score" required>
+    <input type="number" id="price" placeholder="Price per kg" required>
+    <input type="number" id="quantity" placeholder="Quantity in kg" required>
 
-  <div id="hamburger" class="hamburger">☰</div>
+    <select id="status">
+      <option value="available">Available</option>
+      <option value="sold">Sold</option>
+    </select>
 
-  <nav id="navMenu">
-    <a href="index.html">Home</a>
-    <a href="farmers.html">Our Farmers</a>
-    <a href="lots.html">Microlots</a>
-    <a href="aboutus.html">About Us</a>
-    <a href="#">Inquiry</a>
-    <a href="#">Contact</a>
-  </nav>
-</header>
+    <input type="text" id="image" placeholder="Image URL (later from Firebase Storage)">
 
-<section class="lots-container" id="lots"></section>
+    <button type="submit">Add Microlot</button>
+  </form>
 
-<script src="lots.js"></script>
+  <p id="success-msg" style="margin-top:20px;"></p>
+
+  <!-- Firebase + Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "PASTE",
+      authDomain: "PASTE",
+      projectId: "PASTE",
+      storageBucket: "PASTE",
+      messagingSenderId: "PASTE",
+      appId: "PASTE"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById('lot-form');
+    const msg = document.getElementById('success-msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      await addDoc(collection(db, "microlots"), {
+        farm: form.farm.value,
+        process: form.process.value,
+        cupping: form.cupping.value,
+        price: form.price.value,
+        quantity: form.quantity.value,
+        status: form.status.value,
+        image: form.image.value,
+        createdAt: new Date()
+      });
+
+      msg.innerText = "✅ Microlot added successfully!";
+      form.reset();
+    });
+  </script>
+
 </body>
 </html>
