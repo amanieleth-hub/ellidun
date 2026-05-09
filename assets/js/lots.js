@@ -44,11 +44,10 @@ async function getFarmer(farmerId) {
   return null;
 }
 
-// build row
 function createRow(lot, farmer) {
   const tr = document.createElement("tr");
 
-  const farmerName = farmer?.name || lot.farm || "Unknown Farmer";
+  const farmerName = farmer?.name || "Unknown Farmer";
   const region = farmer?.region || "-";
   const altitude = farmer?.altitude ? farmer.altitude + " m" : "-";
 
@@ -71,11 +70,9 @@ function createRow(lot, farmer) {
 
     <td>
       <span class="status ${lot.status}">
-        ${lot.status || "unknown"}
+        ${lot.status}
       </span>
-    </td>
-
-    <td>
+      <br/>
       <a href="inquiry.html?lot=${lot.lotId}" class="action-btn">
         Request
       </a>
