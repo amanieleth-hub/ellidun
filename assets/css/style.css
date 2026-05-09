@@ -339,43 +339,57 @@ section,
    MICROLOTS TABLE
 ========================= */
 
-.lots-section{
-  padding:160px 24px 100px;
-  max-width:1400px;
-  margin:0 auto;
+.lots-section {
+  padding: 140px 24px 80px;
+  max-width: 1400px;   /* wider for large screens */
+  margin: 0 auto;
 }
 
-.lots-table-wrapper{
-  overflow-x:auto;
-  margin-top:40px;
-  background:#fffdf9;
-  border-radius:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+.lots-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
 }
 
-#lotsTable{
-  width:100%;
-  border-collapse:collapse;
-  min-width:1000px;
+.lots-table {
+  width: 100%;
+  min-width: 950px;   /* prevents squishing */
+  border-collapse: collapse;
+  background: #fffdf9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-#lotsTable th,
-#lotsTable td{
-  padding:14px 16px;
-  border-bottom:1px solid #e6ded2;
-  text-align:left;
-  font-size:14px;
+.lots-table th {
+  background: #3d271a;
+  color: white;
+  text-align: left;
+  padding: 16px 18px;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+.lots-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.lots-table td,
+.lots-table th {
+  border-right: 1px solid rgba(0,0,0,0.05);
 }
 
-#lotsTable th{
-  background:#f3efe7;
-  font-weight:600;
+.lots-table td:last-child,
+.lots-table th:last-child {
+  border-right: none;
 }
-
-#lotsTable tr:hover{
-  background:#faf6f0;
+.lots-table tr:hover {
+  background: #f6f1ea;
 }
-
 .lot-action{
   background:#7a5c45;
   color:white;
@@ -501,6 +515,28 @@ section,
 
   .farmers-glimpse{
     padding:60px 20px;
+  }
+  .lots-section {
+    padding: 120px 12px 60px;
+  }
+
+  .lots-table {
+    min-width: 850px;
+  }
+
+  .lots-table th {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .lots-table td {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .action-btn {
+    padding: 6px 10px;
+    font-size: 12px;
   }
   .microlots-page {
     padding: 120px 12px 80px;
