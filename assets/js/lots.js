@@ -1,28 +1,26 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  where
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+// Firebase imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, getDoc, query, where } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// YOUR CONFIG
+// 🔥 Your Firebase config here
 const firebaseConfig = {
-      apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
-      authDomain: "ellidun-microlot-coffee.firebaseapp.com",
-      projectId: "ellidun-microlot-coffee",
-      storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
-      messagingSenderId: "286011718104",
-      appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+  storageBucket: "YOUR_BUCKET",
+  messagingSenderId: "YOUR_SENDER",
+  appId: "YOUR_APP_ID"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const lotsBody = document.getElementById("lotsBody");
+// Reference table body
+const tableBody = document.getElementById("lotsTableBody");
 
-async function loadLots(){
+// Load microlots
+async function loadLots() {
   const q = query(
     collection(db, "microlots"),
     where("status", "==", "available")
@@ -30,30 +28,42 @@ async function loadLots(){
 
   const snapshot = await getDocs(q);
 
-  snapshot.forEach(doc => {
-    const lot = doc.data();
+  for (const lotDoc of snapshot.docs) {
+    const lot = lotDoc.data();
 
-    const row = `
-      <tr>
-        <td>${lot.lotId}</td>
-        <td><a href="farmer.html?name=${lot.farmerName}">${lot.farmerName}</a></td>
-        <td>${lot.region}</td>
-        <td>${lot.altitude} m</td>
-        <td>${lot.process}</td>
-        <td>${lot.cuppingScore}</td>
-        <td>${lot.cupNotes}</td>
-        <td>${lot.quantity}</td>
-        <td>$${lot.price}/kg</td>
-        <td>
-          <a class="lot-action" href="contact.html?lot=${lot.lotId}">
-            Inquire
-          </a>
-        </td>
-      </tr>
+    // Fetch farmer using farmerId
+    const farmerRef = doc(db, "farmers", lot.farmerId);
+    const farmerSnap = await getDoc(farmerRef);
+    const farmer = farmerSnap.data();
+
+    // Build row
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${lot.lotId}</td>
+
+      <td>
+        <a href="farmers/${lot.farmerId}.html" class="farmer-link">
+          ${farmer.name}
+        </a>
+      </td>
+
+      <td>${farmer.region}</td>
+      <td>${farmer.altitude} m</td>
+      <td>${lot.process}</td>
+      <td>${lot.cupping}</td>
+      <td>${lot.quantity} kg</td>
+      <td>$${lot.price}</td>
+
+      <td>
+        <a href="inquiry.html?lot=${lot.lotId}" class="btn-brown-outline">
+          Inquire
+        </a>
+      </td>
     `;
 
-    lotsBody.innerHTML += row;
-  });
+    tableBody.appendChild(row);
+  }
 }
 
 loadLots();
