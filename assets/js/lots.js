@@ -1,59 +1,59 @@
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+// YOUR CONFIG
 const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_MSG",
-  appId: "YOUR_APP_ID"
+  apiKey: "XXXX",
+  authDomain: "XXXX",
+  projectId: "XXXX",
+  storageBucket: "XXXX",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const tbody = document.querySelector("#lotsTable tbody");
+const lotsBody = document.getElementById("lotsBody");
 
 async function loadLots(){
-  const querySnapshot = await getDocs(collection(db, "microlots"));
+  const q = query(
+    collection(db, "microlots"),
+    where("status", "==", "available")
+  );
 
-  querySnapshot.forEach((doc) => {
+  const snapshot = await getDocs(q);
+
+  snapshot.forEach(doc => {
     const lot = doc.data();
-
-    // show only available
-    if(lot.status !== "available" || lot.quantity <= 0) return;
 
     const row = `
       <tr>
-        <td>${lot.lotid}</td>
-        <td>
-          <a href="farmer-${lot.farmer}.html" class="farmer-link">
-            ${lot.farmer}
-          </a>
-        </td>
+        <td>${lot.lotId}</td>
+        <td><a href="farmer.html?name=${lot.farmerName}">${lot.farmerName}</a></td>
         <td>${lot.region}</td>
         <td>${lot.altitude} m</td>
         <td>${lot.process}</td>
-        <td>${lot.cupscore}</td>
-        <td>${lot.cupnotes}</td>
+        <td>${lot.cuppingScore}</td>
+        <td>${lot.cupNotes}</td>
         <td>${lot.quantity}</td>
-        <td>${lot.price}</td>
+        <td>$${lot.price}/kg</td>
         <td>
-          <a href="contact.html?lot=${lot.lotid}" class="inquire-btn">
+          <a class="lot-action" href="contact.html?lot=${lot.lotId}">
             Inquire
           </a>
         </td>
       </tr>
     `;
 
-    tbody.innerHTML += row;
+    lotsBody.innerHTML += row;
   });
 }
 
 loadLots();
-
-
-
-
