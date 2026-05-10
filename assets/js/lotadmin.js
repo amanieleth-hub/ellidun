@@ -64,7 +64,7 @@ function toTitleCase(val) {
 
 // farmerId derived from name (consistent between add and edit)
 function toFarmerId(name) {
-  return name.toLowerCase().replace(/\s+/g, "");
+  return name.toLowerCase().replace(/\s+/g, "_");
 }
 
 // Auto-format on blur for cased fields
