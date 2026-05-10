@@ -37,7 +37,33 @@ async function uploadImages(files, farmerId){
   }
   return urls;
 }
+// IMAGE PREVIEW BEFORE UPLOAD
+const imageInput = document.getElementById("farmerImages");
+const preview = document.getElementById("imagePreview");
 
+imageInput.addEventListener("change", () => {
+  preview.innerHTML = "";
+
+  const files = imageInput.files;
+
+  if(files.length > 4){
+    alert("Please select maximum 4 images");
+    imageInput.value = "";
+    return;
+  }
+
+  Array.from(files).forEach(file => {
+    const reader = new FileReader();
+
+    reader.onload = e => {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      preview.appendChild(img);
+    };
+
+    reader.readAsDataURL(file);
+  });
+});
 // Save button
 document.getElementById("saveBtn").addEventListener("click", async ()=>{
 
