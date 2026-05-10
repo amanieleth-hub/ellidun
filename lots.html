@@ -4,69 +4,310 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin – Farmers & Microlots</title>
-
-  <link rel="stylesheet" href="assets/css/style.css"/>
-  <link rel="stylesheet" href="assets/css/lots.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css"/>
 </head>
 <body>
 
-<section class="admin-container">
+<div id="toast" class="toast"></div>
 
-  <h1>Farmers & Microlots Admin</h1>
-
-  <!-- FARMER SECTION -->
-  <div class="card">
-    <h2>Farmer Profile</h2>
-
-    <input list="farmerList" id="name" placeholder="Farmer Full Name"/>
-    <datalist id="farmerList"></datalist>
-
-    <input id="mothername" placeholder="Mother's Name"/>
-    <input id="spousename" placeholder="Spouse Name"/>
-    <input type="number" id="age" placeholder="Age"/>
-
-    <input type="number" id="altitude" placeholder="Altitude"/>
-    <input type="number" id="landsize" placeholder="Land Size (hectare)"/>
-    <input type="number" id="numbersofchild" placeholder="Number of Children"/>
-
-    <select id="region">
-      <option value="">Select Region</option>
-      <option>Guji Uraga</option>
-      <option>Guji Dimtu</option>
-      <option>Yirgacheffe</option>
-      <option>Sidama</option>
-    </select>
-
-    <input id="village" placeholder="Village"/>
-
-    <input id="plantationarea" placeholder="Plantation Areas"/>
-    <textarea id="enviromental" placeholder="Environmental Practices"></textarea>
-    <textarea id="story" placeholder="Farmer Story"></textarea>
-
-    <label>Farmer Images (4 photos)</label>
-    <input type="file" id="farmerImages" multiple accept="image/*">
-
-    <div id="imagePreview" class="preview-grid"></div>
-
-  <!-- MICROLOT SECTION -->
-  <div class="card">
-    <h2>Microlot Information</h2>
-
-    <input id="lotId" placeholder="Lot ID"/>
-    <input id="process" placeholder="Process"/>
-    <input id="cupping" placeholder="Cupping Notes"/>
-    <input type="number" id="score" placeholder="Score"/>
-    <input type="number" id="quantity" placeholder="Quantity (kg)"/>
-    <input type="number" id="price" placeholder="Price per kg"/>
-
-    <button id="saveBtn">Save Farmer & Microlot</button>
+<header class="page-header">
+  <div class="header-inner">
+    <span class="header-logo">☕</span>
+    <div>
+      <h1>Farm &amp; Lot Admin</h1>
+      <p>Manage farmer profiles and microlot records</p>
+    </div>
   </div>
+</header>
 
-</section>
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="addFarmer">＋ Add Farmer</button>
+  <button class="tab-btn"        data-tab="addMicrolot">＋ Add Microlot</button>
+  <button class="tab-btn"        data-tab="editFarmer">✎ Edit Farmer</button>
+  <button class="tab-btn"        data-tab="editMicrolot">✎ Edit Microlot</button>
+</nav>
+
+<main class="admin-container">
+
+  <!-- ═══ TAB 1 — ADD FARMER ═══════════════════════════════════════════════ -->
+  <section class="tab-panel active" id="tab-addFarmer">
+    <div class="card">
+      <div class="card-header green">
+        <span class="card-icon">🌱</span>
+        <h2>New Farmer Profile</h2>
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Farmer Full Name <span class="req">*</span></label>
+          <input list="farmerList" id="name" placeholder="JOHN SMITH" class="uppercase"/>
+          <datalist id="farmerList"></datalist>
+        </div>
+        <div class="field">
+          <label>Mother's Name <span class="req">*</span></label>
+          <input id="mothername" placeholder="Jane Smith" class="titlecase"/>
+        </div>
+        <div class="field">
+          <label>Spouse Name</label>
+          <input id="spousename" placeholder="Jane Smith" class="titlecase"/>
+        </div>
+        <div class="field">
+          <label>Age <span class="req">*</span></label>
+          <input type="number" id="age" placeholder="35" min="18" max="100"/>
+        </div>
+        <div class="field">
+          <label>Altitude (m)</label>
+          <input type="number" id="altitude" placeholder="1800"/>
+        </div>
+        <div class="field">
+          <label>Land Size (ha)</label>
+          <input type="number" id="landsize" placeholder="2.5" step="0.1"/>
+        </div>
+        <div class="field">
+          <label>No. of Children</label>
+          <input type="number" id="numbersofchild" placeholder="3" min="0"/>
+        </div>
+        <div class="field">
+          <label>Region <span class="req">*</span></label>
+          <select id="region">
+            <option value="">Select Region</option>
+            <option>Guji Uraga</option>
+            <option>Guji Dimtu</option>
+            <option>Yirgacheffe</option>
+            <option>Sidama</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Village <span class="req">*</span></label>
+          <input id="village" placeholder="Village name"/>
+        </div>
+        <div class="field full">
+          <label>Plantation Areas</label>
+          <input id="plantationarea" placeholder="Plot names or coordinates"/>
+        </div>
+        <div class="field full">
+          <label>Environmental Practices</label>
+          <textarea id="enviromental" placeholder="Shade grown, organic, water conservation…" rows="3"></textarea>
+        </div>
+        <div class="field full">
+          <label>Farmer Story <span class="req">*</span></label>
+          <textarea id="story" placeholder="Tell the farmer's story…" rows="4"></textarea>
+        </div>
+        <div class="field full">
+          <label>Farmer Images <span class="hint">(max 4 photos)</span></label>
+          <input type="file" id="farmerImages" multiple accept="image/*" class="file-input"/>
+          <div id="imagePreview" class="preview-grid"></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-green" id="saveFarmerBtn">💾 Save Farmer Profile</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TAB 2 — ADD MICROLOT ══════════════════════════════════════════════ -->
+  <section class="tab-panel" id="tab-addMicrolot">
+    <div class="card">
+      <div class="card-header blue">
+        <span class="card-icon">🏷️</span>
+        <h2>New Microlot</h2>
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Farmer Name <span class="req">*</span></label>
+          <input list="farmerListMicrolot" id="microlotFarmerName" placeholder="Start typing farmer name…"/>
+          <datalist id="farmerListMicrolot"></datalist>
+        </div>
+        <div class="field">
+          <label>Lot ID <span class="req">*</span></label>
+          <input id="lotId" placeholder="GU-2024-001"/>
+        </div>
+        <div class="field">
+          <label>Process <span class="req">*</span></label>
+          <input id="process" placeholder="Natural / Washed / Honey"/>
+        </div>
+        <div class="field full">
+          <label>Cupping Notes</label>
+          <input id="cupping" placeholder="Blueberry, jasmine, brown sugar…"/>
+        </div>
+        <div class="field">
+          <label>Score <span class="req">*</span></label>
+          <input type="number" id="score" placeholder="87.5" step="0.25" min="0" max="100"/>
+        </div>
+        <div class="field">
+          <label>Quantity (kg) <span class="req">*</span></label>
+          <input type="number" id="quantity" placeholder="120" min="0"/>
+        </div>
+        <div class="field">
+          <label>Price / kg <span class="req">*</span></label>
+          <input type="number" id="price" placeholder="18.50" step="0.01" min="0"/>
+        </div>
+        <div class="field">
+          <label>Status</label>
+          <select id="newLotStatus">
+            <option value="available">Available</option>
+            <option value="reserved">Reserved</option>
+            <option value="sold">Sold</option>
+          </select>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-blue" id="saveMicrolotBtn">💾 Save Microlot</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TAB 3 — EDIT FARMER ═══════════════════════════════════════════════ -->
+  <section class="tab-panel" id="tab-editFarmer">
+    <div class="card">
+      <div class="card-header amber">
+        <span class="card-icon">✏️</span>
+        <h2>Edit Farmer Profile</h2>
+      </div>
+      <div class="lookup-row">
+        <div class="field" style="flex:1">
+          <label>Search Farmer by Name <span class="req">*</span></label>
+          <input list="farmerListEdit" id="editFarmerSearch" placeholder="Type farmer name…"/>
+          <datalist id="farmerListEdit"></datalist>
+        </div>
+        <button class="btn btn-amber" id="loadFarmerBtn">🔍 Load</button>
+      </div>
+      <p id="editFarmerNotFound" class="not-found hidden">No farmer found with that name.</p>
+
+      <div id="editFarmerFields" class="form-grid hidden">
+        <input type="hidden" id="ef_farmerId"/>
+        <div class="field full">
+          <label>Farmer Full Name <span class="req">*</span></label>
+          <input id="ef_name" class="uppercase"/>
+        </div>
+        <div class="field">
+          <label>Mother's Name <span class="req">*</span></label>
+          <input id="ef_mothername" class="titlecase"/>
+        </div>
+        <div class="field">
+          <label>Spouse Name</label>
+          <input id="ef_spousename" class="titlecase"/>
+        </div>
+        <div class="field">
+          <label>Age <span class="req">*</span></label>
+          <input type="number" id="ef_age" min="18" max="100"/>
+        </div>
+        <div class="field">
+          <label>Altitude (m)</label>
+          <input type="number" id="ef_altitude"/>
+        </div>
+        <div class="field">
+          <label>Land Size (ha)</label>
+          <input type="number" id="ef_landsize" step="0.1"/>
+        </div>
+        <div class="field">
+          <label>No. of Children</label>
+          <input type="number" id="ef_numbersofchild" min="0"/>
+        </div>
+        <div class="field">
+          <label>Region <span class="req">*</span></label>
+          <select id="ef_region">
+            <option value="">Select Region</option>
+            <option>Guji Uraga</option>
+            <option>Guji Dimtu</option>
+            <option>Yirgacheffe</option>
+            <option>Sidama</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Village <span class="req">*</span></label>
+          <input id="ef_village"/>
+        </div>
+        <div class="field full">
+          <label>Plantation Areas</label>
+          <input id="ef_plantationarea"/>
+        </div>
+        <div class="field full">
+          <label>Environmental Practices</label>
+          <textarea id="ef_enviromental" rows="3"></textarea>
+        </div>
+        <div class="field full">
+          <label>Farmer Story <span class="req">*</span></label>
+          <textarea id="ef_story" rows="4"></textarea>
+        </div>
+        <div class="field full">
+          <label>Add / Replace Images <span class="hint">(leave empty to keep existing)</span></label>
+          <input type="file" id="ef_farmerImages" multiple accept="image/*" class="file-input"/>
+          <div id="ef_imagePreview" class="preview-grid"></div>
+          <div id="ef_existingImages" class="existing-images"></div>
+        </div>
+        <div class="card-footer full">
+          <button class="btn btn-amber" id="updateFarmerBtn">💾 Update Farmer</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TAB 4 — EDIT MICROLOT ═════════════════════════════════════════════ -->
+  <section class="tab-panel" id="tab-editMicrolot">
+    <div class="card">
+      <div class="card-header rose">
+        <span class="card-icon">📦</span>
+        <h2>Edit Microlot</h2>
+      </div>
+      <div class="lookup-row">
+        <div class="field" style="flex:1">
+          <label>Search by Lot ID <span class="req">*</span></label>
+          <input id="editLotSearch" placeholder="e.g. GU-2024-001"/>
+        </div>
+        <button class="btn btn-rose" id="loadLotBtn">🔍 Load</button>
+      </div>
+      <p id="editLotNotFound" class="not-found hidden">No lot found with that ID.</p>
+
+      <div id="editLotFields" class="form-grid hidden">
+        <input type="hidden" id="el_docId"/>
+        <div class="field">
+          <label>Lot ID</label>
+          <input id="el_lotId" readonly class="readonly"/>
+        </div>
+        <div class="field">
+          <label>Farmer</label>
+          <input id="el_farmerName" readonly class="readonly"/>
+        </div>
+        <div class="field">
+          <label>Process</label>
+          <input id="el_process"/>
+        </div>
+        <div class="field full">
+          <label>Cupping Notes</label>
+          <input id="el_cupping"/>
+        </div>
+        <div class="field">
+          <label>Score</label>
+          <input type="number" id="el_score" step="0.25" min="0" max="100"/>
+        </div>
+        <div class="field">
+          <label>Quantity (kg) <span class="req">*</span></label>
+          <input type="number" id="el_quantity" min="0"/>
+        </div>
+        <div class="field">
+          <label>Price / kg <span class="req">*</span></label>
+          <input type="number" id="el_price" step="0.01" min="0"/>
+        </div>
+        <div class="field">
+          <label>Status <span class="req">*</span></label>
+          <select id="el_status">
+            <option value="available">Available</option>
+            <option value="reserved">Reserved</option>
+            <option value="sold">Sold</option>
+          </select>
+        </div>
+        <div class="card-footer full">
+          <button class="btn btn-rose" id="updateLotBtn">💾 Update Microlot</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <script type="module" src="assets/js/lotadmin.js"></script>
 </body>
 </html>
-
-
-
