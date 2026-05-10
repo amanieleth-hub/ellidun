@@ -1,559 +1,98 @@
-*{ box-sizing:border-box; }
+/* lots.css */
 
-body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:#f3efe7;
-  color:#2b2b2b;
-  overflow-x:hidden;
+.admin-container{
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-h1,h2,h3{
-  font-family:'Playfair Display',serif;
+/* Cards */
+.card{
+  background: #ffffff;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  border: 1px solid #eee;
 }
 
-/* ================= WIDTH SYSTEM (SAFE) ================= */
-section,
-.hero,
-.stats,
-.farmers-glimpse,
-.why-ellidun,
-.how-it-works{
-  width:100%;
-  max-width:1400px;
-  margin:0 auto;
-  padding-left:24px;
-  padding-right:24px;
+/* Titles */
+h1{
+  text-align: center;
+  margin-bottom: 50px;
+  color: #3b2a1d;
 }
 
-/* ================= TOPBAR ================= */
-.topbar{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  background:#f3efe7;
-  padding:14px 28px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #e0d8cc;
-  z-index:1000;
-}
-
-.brand{ display:flex; align-items:center; gap:10px; }
-.logo-img{ height:34px; }
-
-.logo-text{
-  font-weight:600;
-  font-size:15px;
-  color:#3b2a1f;
-}
-
-/* NAV */
-#navMenu{
-  display:flex;
-  gap:14px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-#navMenu a{
-  text-decoration:none;
-  color:#3b2a1f;
-  font-weight:600;
-  padding:10px 18px;
-  border-radius:6px;
-  font-size:14px;
-  transition:.3s;
-}
-
-#navMenu a:hover{
-  background:#7a5c45;
-  color:#fff;
-}
-
-.hamburger{
-  display:none;
-  font-size:30px;
-  cursor:pointer;
-}
-
-/* ================= HERO ================= */
-.hero{
-  position:relative;
-  height:100vh;
-  min-height:700px;
-  background:url('assets/images/farmer.jpg') center center/cover no-repeat;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  padding:140px 70px 70px;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.45);
-}
-
-.overlay{
-  position:relative;
-  z-index:2;
-  max-width:720px;
-  color:#fff;
-}
-
-.overlay h1{
-  font-size:clamp(32px,5vw,60px);
-  line-height:1.1;
-}
-
-.overlay p{
-  font-size:clamp(16px,2vw,20px);
-  margin-top:18px;
-}
-
-.hero-buttons{
-  display:flex;
-  gap:18px;
-  margin-top:auto;
-  position:relative;
-  z-index:2;
-}
-
-/* =========================
-   GLOBAL BUTTON STYLE
-========================= */
-.btn-brown,
-.btn-brown-outline,
-.browse-all-btn,
-.roasters-btn {
-  display: inline-block;
-  padding: 16px 36px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 15px;
-  transition: 0.3s ease;
-}
-
-.btn-brown {
-  background: #7a5c45;
-  color: #fff;
-}
-
-.btn-brown-outline {
-  border: 2px solid #fff;
-  color: #fff;
-  background: transparent;
-}
-
-.browse-all-btn {
-  background: #7a5c45;
-  color: #fff;
-}
-
-.btn-brown:hover,
-.browse-all-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-}
-/* ================= STATS ================= */
-.stats{
-  display:flex;
-  justify-content:space-around;
-  padding:80px 20px;
-  background:#3d271a;
-  color:#fff;
-  text-align:center;
-  opacity:0;
-  transform:translateY(40px);
-  transition:.8s;
-}
-
-.stats.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* =========================
-/* =========================
-   FARMERS HERO
-========================= */
-.farmers-hero{
-  padding:140px 24px 40px;
-  text-align:center;
-}
-
-/* =========================
-   FARMERS GLIMPSE GRID (FINAL FIX)
-========================= */
-.farmers-glimpse{
-  padding:80px 10vw 120px;
-  display:flex;
-  flex-direction:column;
-  gap:50px;
-  max-width:1200px;
-  margin:auto;
-}
-
-/* CARD (UNIFIED STYLE) */
-.farm-card{
-  display:flex;
-  gap:25px;
-  align-items:center;
-  background:#fffdf9;
-  padding:18px;
-  border-radius:10px;
-  text-decoration:none;
-  color:inherit;
-
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
-  transition:0.4s ease;
-
-  opacity:0;
-  transform:translateY(40px);
-}
-
-.farm-card.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.farm-card:hover{
-  transform:translateY(-6px);
-}
-
-/* IMAGE CONTROL (IMPORTANT FIX) */
-.farm-card img{
-  width:260px;
-  height:180px;
-  object-fit:cover;
-  border-radius:8px;
-  flex-shrink:0;
-}
-
-/* TEXT */
-.farm-info h3{
-  margin:0;
-  font-size:20px;
-}
-
-.farm-info p{
-  margin:5px 0;
-  opacity:0.8;
-}
-/* ================= WHY ================= */
-.why-ellidun{
-  padding:120px 0;
-  text-align:center;
-}
-
-.why-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-}
-
-.why-card{
-  background:#fffdf9;
-  padding:30px;
-  border:1px solid #e6ded2;
-  border-radius:10px;
-  transition:.3s;
-}
-
-.why-card:hover{
-  transform:translateY(-6px);
-}
-
-/* =========================
-   HOW IT WORKS FIX (FINAL)
-========================= */
-
-.how-it-works{
-  padding:120px 70px;
-  background:#3d271a;
-  color:#fff;
-  text-align:center;
-}
-
-.steps{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-  gap:25px;
-  margin-top:50px;
-}
-
-/* IMPORTANT FIX */
-.step{
-  display:block;
-  width:100%;
-  height:100%;
-  background:rgba(255,255,255,0.05);
-  padding:25px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.1);
-  box-sizing:border-box;
-
-  /* prevents weird shrink */
-  min-height:180px;
-}
-
-.step h3{
-  margin:10px 0;
-}
-
-.step p{
-  margin:0;
-  line-height:1.6;
-  opacity:0.9;
-}
-
-/* ================= LOTS IMAGE FIX ================= */
-.lots-image img{
-  width:100%;
-  height:auto;
-  max-height:420px;
-  object-fit:cover;
-}
-.lot-form{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-
-.lot-form input,
-.lot-form select{
-  padding:12px;
-  font-size:16px;
-}
-
-.lot-form button{
-  padding:14px;
-  cursor:pointer;
-}
-/* =========================
-   MICROLOTS TABLE
-========================= */
-
-.lots-section {
-  padding: 140px 24px 80px;
-  max-width: 1400px;   /* wider for large screens */
-  margin: 0 auto;
-}
-
-.lots-table-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+h2{
+  margin-bottom: 25px;
+  color: #5a3e2b;
+  border-bottom: 2px solid #eee;
   padding-bottom: 10px;
 }
 
-.lots-table {
+/* Form grid */
+.card{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Full width elements */
+.card h2,
+.card textarea,
+.card button,
+.card label{
+  grid-column: span 2;
+}
+
+/* Inputs */
+input, select, textarea{
   width: 100%;
-  min-width: 950px;   /* prevents squishing */
-  border-collapse: collapse;
-  background: #fffdf9;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: 0.2s;
 }
 
-.lots-table th {
-  background: #3d271a;
-  color: white;
-  text-align: left;
-  padding: 16px 18px;
-  font-size: 13px;
-  letter-spacing: 0.4px;
-  white-space: nowrap;
-}
-.lots-table td {
-  padding: 16px 18px;
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-.lots-table td,
-.lots-table th {
-  border-right: 1px solid rgba(0,0,0,0.05);
+input:focus, select:focus, textarea:focus{
+  outline: none;
+  border-color: #3b2a1d;
+  box-shadow: 0 0 0 2px rgba(59,42,29,0.1);
 }
 
-.lots-table td:last-child,
-.lots-table th:last-child {
-  border-right: none;
+textarea{
+  min-height: 120px;
+  resize: vertical;
 }
-.lots-table tr:hover {
-  background: #f6f1ea;
-}
-.lot-action{
-  background:#7a5c45;
-  color:white;
-  padding:8px 14px;
-  border-radius:6px;
-  text-decoration:none;
-  font-size:13px;
-}
-/* =========================
-   MICRLOTS PAGE
-========================= */
 
-.microlots-page {
-  padding: 140px 24px 100px;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow-x: auto;
-}
-.microlots-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fffdf9;
+/* Button */
+button{
+  padding: 16px;
+  font-size: 16px;
   border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  min-width: 900px; /* IMPORTANT for mobile horizontal scroll */
-}
-
-.microlots-table th {
-  background: #3d271a;
+  background: #3b2a1d;
   color: white;
-  text-align: left;
-  padding: 14px;
-  font-size: 13px;
-  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.microlots-table td {
-  padding: 14px;
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
-  vertical-align: middle;
+button:hover{
+  background: #2a1e14;
 }
 
-.microlots-table tr:hover {
-  background: #f6f1ea;
-}
-.farm-link {
-  color: #7a5c45;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.farm-link:hover {
-  text-decoration: underline;
-}
-.status {
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  display: inline-block;
-}
-
-.status.available {
-  background: #e7f6ea;
-  color: #2e7d32;
-}
-
-.status.sold {
-  background: #fdecea;
-  color: #c62828;
-}
-.action-btn {
-  background: #7a5c45;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-  display: inline-block;
-  transition: 0.3s;
-}
-
-.action-btn:hover {
-  background: #5a4030;
-}
-
-/* ================= MOBILE ================= */
-
-
-@media (max-width:768px){
-
-  .hamburger{ display:block; }
-
-  #navMenu{
-    display:none;
-    position:absolute;
-    top:70px;
-    left:0;
-    width:100%;
-    flex-direction:column;
-    background:#f3efe7;
-    padding:20px;
+/* Mobile */
+@media (max-width: 768px){
+  .card{
+    grid-template-columns: 1fr;
   }
 
-  #navMenu.show{ display:flex; }
-
-  .hero{ padding:120px 25px; }
-
-  .hero-buttons{ flex-direction:column; }
-
-  .farm-card{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .farm-card img{
-    width:100%;
-    height:220px;
-  }
-
-  .farmers-glimpse{
-    padding:60px 20px;
-  }
-  .lots-section {
-    padding: 120px 12px 60px;
-  }
-
-  .lots-table {
-    min-width: 850px;
-  }
-
-  .lots-table th {
-    padding: 12px;
-    font-size: 12px;
-  }
-
-  .lots-table td {
-    padding: 12px;
-    font-size: 12px;
-  }
-
-  .action-btn {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-  .microlots-page {
-    padding: 120px 12px 80px;
-  }
-
-  .microlots-table {
-    min-width: 700px; /* keeps scroll instead of breaking layout */
-  }
-
-  .microlots-table th,
-  .microlots-table td {
-    padding: 10px;
-    font-size: 12px;
-  }
-
-  .action-btn {
-    padding: 6px 10px;
-    font-size: 12px;
+  .card h2,
+  .card textarea,
+  .card button,
+  .card label{
+    grid-column: span 1;
   }
 }
