@@ -3,21 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin – Add Microlot</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="lots.css"/>
+  <title>Admin – Farmers & Microlots</title>
+
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/lots.css"/>
 </head>
 <body>
 
 <section class="admin-container">
-  <h1>Add New Microlot</h1>
 
-  <!-- Farmer Section -->
+  <h1>Farmers & Microlots Admin</h1>
+
+  <!-- FARMER SECTION -->
   <div class="card">
-    <h2>Farmer Information</h2>
+    <h2>Farmer Profile</h2>
 
-    <input list="farmerList" id="farmerName" placeholder="Start typing farmer name..." />
+    <input list="farmerList" id="name" placeholder="Farmer Full Name"/>
     <datalist id="farmerList"></datalist>
+
+    <input id="mothername" placeholder="Mother's Name"/>
+    <input id="spousename" placeholder="Spouse Name"/>
+    <input type="number" id="age" placeholder="Age"/>
+
+    <input type="number" id="altitude" placeholder="Altitude"/>
+    <input type="number" id="landsize" placeholder="Land Size (hectare)"/>
+    <input type="number" id="numbersofchild" placeholder="Number of Children"/>
 
     <select id="region">
       <option value="">Select Region</option>
@@ -27,32 +37,35 @@
       <option>Sidama</option>
     </select>
 
-    <select id="village">
-      <option value="">Select Village</option>
-    </select>
+    <input id="village" placeholder="Village"/>
 
-    <input type="number" id="altitude" placeholder="Altitude" />
+    <input id="plantationarea" placeholder="Plantation Areas"/>
+    <textarea id="enviromental" placeholder="Environmental Practices"></textarea>
     <textarea id="story" placeholder="Farmer Story"></textarea>
 
     <label>Upload 4 Farmer Images</label>
-    <input type="file" id="images" multiple accept="image/*" />
+    <input type="file" id="images" multiple accept="image/*"/>
   </div>
 
-  <!-- Lot Section -->
+  <!-- MICROLOT SECTION -->
   <div class="card">
     <h2>Microlot Information</h2>
 
-    <input type="text" id="lotId" placeholder="Lot ID"/>
-    <input type="text" id="process" placeholder="Process"/>
-    <input type="text" id="cupping" placeholder="Cupping Notes"/>
+    <input id="lotId" placeholder="Lot ID"/>
+    <input id="process" placeholder="Process"/>
+    <input id="cupping" placeholder="Cupping Notes"/>
     <input type="number" id="score" placeholder="Score"/>
     <input type="number" id="quantity" placeholder="Quantity (kg)"/>
     <input type="number" id="price" placeholder="Price per kg"/>
 
-    <button id="saveBtn">Save Microlot</button>
+    <button id="saveBtn">Save Farmer & Microlot</button>
   </div>
+
 </section>
 
-<script type="module" src="lotadmin.js"></script>
+<script type="module" src="assets/js/lotadmin.js"></script>
 </body>
 </html>
+
+
+
