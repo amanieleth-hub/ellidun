@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farmer Story — Ellidun Microlot Coffee Export</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet"/>
+  <link href="assets/css/farmer-story.css" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ── YOUR EXISTING HEADER ─────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/images/logo.png" class="logo-img" alt="Ellidun"/>
+      <div class="logo-text">Ellidun Microlot Coffee Export</div>
+    </div>
+    <div id="hamburger" class="hamburger">☰</div>
+    <nav id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="farmers.html" class="active">Our Farmers</a>
+      <a href="microlot.html">Microlots</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="inquiry.html">Inquiry</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ── LOADING STATE ────────────────────────────────────────────────── -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-cherry">🍒</div>
+    <p>Loading farmer profile…</p>
+  </div>
+
+  <!-- ── ERROR STATE ──────────────────────────────────────────────────── -->
+  <div id="errorScreen" class="error-screen hidden">
+    <p>⚠️ Farmer not found.</p>
+    <a href="farmers.html" class="btn-back-error">← Back to Farmers</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       MAIN PAGE CONTENT — filled by JS
+  ══════════════════════════════════════════════════════════════════════ -->
+  <main id="pageContent" class="hidden">
+
+    <!-- ── HERO ──────────────────────────────────────────────────────── -->
+    <section class="hero">
+      <!-- decorative grain overlay -->
+      <div class="hero-grain"></div>
+      <!-- hero bg = first farmer image -->
+      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <a href="farmers.html" class="btn-back">← Our Farmers</a>
+        <div class="hero-tag">Farmer Profile</div>
+        <h1 id="heroName" class="hero-name"></h1>
+        <p id="heroRegion" class="hero-region"></p>
+      </div>
+      <!-- scroll cue -->
+      <div class="scroll-cue">
+        <span></span><span></span><span></span>
+      </div>
+    </section>
+
+    <!-- ── GALLERY ────────────────────────────────────────────────────── -->
+    <section class="gallery-section" id="gallerySection">
+      <div class="gallery-label">
+        <span class="cherry-dot">●</span> Gallery
+      </div>
+      <!-- large active image -->
+      <div class="gallery-main">
+        <img id="galleryMain" src="" alt="Farmer photo"/>
+      </div>
+      <!-- thumbnails -->
+      <div class="gallery-thumbs" id="galleryThumbs"></div>
+    </section>
+
+    <!-- ── STORY + DETAILS ────────────────────────────────────────────── -->
+    <section class="story-section">
+      <div class="story-layout">
+
+        <!-- LEFT: story bio -->
+        <div class="story-text">
+          <div class="section-label"><span class="cherry-dot">●</span> The Story</div>
+          <blockquote class="story-pull" id="storyPull"></blockquote>
+          <p class="story-body" id="storyBody"></p>
+
+          <!-- Environmental practices -->
+          <div class="env-block" id="envBlock">
+            <div class="env-icon">🌿</div>
+            <div>
+              <h4>Environmental Practices</h4>
+              <p id="envText"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: stat cards -->
+        <aside class="story-stats">
+          <div class="section-label"><span class="cherry-dot">●</span> Farmer Details</div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-icon">📍</span>
+              <span class="stat-label">Region</span>
+              <span class="stat-value" id="statRegion"></span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">🏡</span>
+              <span class="stat-label">Village</span>
+              <span class="stat-value" id="statVillage"></span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">🎂</span>
+              <span class="stat-label">Age</span>
+              <span class="stat-value" id="statAge"></span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">👨‍👩‍👧</span>
+              <span class="stat-label">Children</span>
+              <span class="stat-value" id="statChildren"></span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">⛰️</span>
+              <span class="stat-label">Altitude</span>
+              <span class="stat-value" id="statAltitude"></span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">🌾</span>
+              <span class="stat-label">Land Size</span>
+              <span class="stat-value" id="statLand"></span>
+            </div>
+            <div class="stat-card full">
+              <span class="stat-icon">🗺️</span>
+              <span class="stat-label">Plantation Areas</span>
+              <span class="stat-value" id="statPlantation"></span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ── MICROLOTS ──────────────────────────────────────────────────── -->
+    <section class="lots-section">
+      <div class="lots-header">
+        <div class="section-label"><span class="cherry-dot">●</span> Microlots</div>
+        <h2>Available from This Farm</h2>
+      </div>
+      <div class="lots-grid" id="lotsGrid">
+        <!-- filled by JS -->
+      </div>
+      <div id="noLots" class="no-lots hidden">No microlots currently listed for this farmer.</div>
+    </section>
+
+    <!-- ── FOOTER CTA ─────────────────────────────────────────────────── -->
+    <section class="cta-section">
+      <div class="cta-grain"></div>
+      <div class="cta-content">
+        <p class="cta-sub">Interested in this farmer's coffee?</p>
+        <h2 class="cta-title">Make an Inquiry</h2>
+        <a href="inquiry.html" class="cta-btn">Get in Touch →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="assets/js/farmer-story.js"></script>
+</body>
+</html>
