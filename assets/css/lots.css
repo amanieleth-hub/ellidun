@@ -1,0 +1,36 @@
+.admin-container{
+  max-width:900px;
+  margin:40px auto;
+  padding:20px;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  margin-bottom:30px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:120px;
+}
+
+button{
+  padding:14px;
+  background:#3b2a1d;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:16px;
+}
