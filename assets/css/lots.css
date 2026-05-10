@@ -1,36 +1,98 @@
+/* lots.css */
+
 .admin-container{
-  max-width:900px;
-  margin:40px auto;
-  padding:20px;
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Cards */
 .card{
-  background:#fff;
-  padding:20px;
-  margin-bottom:30px;
-  border-radius:10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
+  background: #ffffff;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  border: 1px solid #eee;
 }
 
+/* Titles */
+h1{
+  text-align: center;
+  margin-bottom: 50px;
+  color: #3b2a1d;
+}
+
+h2{
+  margin-bottom: 25px;
+  color: #5a3e2b;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Form grid */
+.card{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Full width elements */
+.card h2,
+.card textarea,
+.card button,
+.card label{
+  grid-column: span 2;
+}
+
+/* Inputs */
 input, select, textarea{
-  width:100%;
-  padding:12px;
-  margin-bottom:15px;
-  border:1px solid #ccc;
-  border-radius:6px;
-  font-size:15px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+input:focus, select:focus, textarea:focus{
+  outline: none;
+  border-color: #3b2a1d;
+  box-shadow: 0 0 0 2px rgba(59,42,29,0.1);
 }
 
 textarea{
-  min-height:120px;
+  min-height: 120px;
+  resize: vertical;
 }
 
+/* Button */
 button{
-  padding:14px;
-  background:#3b2a1d;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:16px;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  background: #3b2a1d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover{
+  background: #2a1e14;
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .card{
+    grid-template-columns: 1fr;
+  }
+
+  .card h2,
+  .card textarea,
+  .card button,
+  .card label{
+    grid-column: span 1;
+  }
 }
