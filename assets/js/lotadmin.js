@@ -3,15 +3,18 @@ import {
   getFirestore, collection, getDocs,
   doc, setDoc, addDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import {
-  getStorage, ref, uploadBytes, getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-const firebaseConfig = { /* YOUR CONFIG */ };
+const firebaseConfig = { const firebaseConfig = {
+      apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
+      authDomain: "ellidun-microlot-coffee.firebaseapp.com",
+      projectId: "ellidun-microlot-coffee",
+      storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
+      messagingSenderId: "286011718104",
+      appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
+    } };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
 // Load farmer names for autocomplete
 const farmerList = document.getElementById("farmerList");
@@ -27,13 +30,29 @@ async function loadFarmers(){
 loadFarmers();
 
 // Upload images
-async function uploadImages(files, farmerId){
-  const urls=[];
-  for(const file of files){
-    const imageRef = ref(storage,`farmers/${farmerId}/${file.name}`);
-    await uploadBytes(imageRef,file);
-    const url = await getDownloadURL(imageRef);
-    urls.push(url);
+const CLOUDINARY_CLOUD_NAME = "devkhvfvq";   // from Cloudinary dashboard
+const CLOUDINARY_UPLOAD_PRESET = "farmersimages"; // the unsigned preset you created
+
+async function uploadImages(files, farmerId) {
+  const urls = [];
+  for (const file of files) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    formData.append("folder", `farmers/${farmerId}`); // organizes by farmer
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+      { method: "POST", body: formData }
+    );
+
+    const data = await response.json();
+    if (data.secure_url) {
+      urls.push(data.secure_url);
+    } else {
+      console.error("Cloudinary upload failed:", data);
+      throw new Error("Image upload failed");
+    }
   }
   return urls;
 }
