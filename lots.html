@@ -3,70 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Create Microlot</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Admin – Add Microlot</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="lots.css"/>
 </head>
-<body style="padding:60px 24px; max-width:700px; margin:auto;">
+<body>
 
-  <h2>Create New Microlot</h2>
+<section class="admin-container">
+  <h1>Add New Microlot</h1>
 
-  <form id="lot-form" class="lot-form">
-    <input type="text" id="farm" placeholder="Farm / Farmer name" required>
-    <input type="text" id="process" placeholder="Process (Washed / Natural / Honey)" required>
-    <input type="number" id="cupping" placeholder="Cupping score" required>
-    <input type="number" id="price" placeholder="Price per kg" required>
-    <input type="number" id="quantity" placeholder="Quantity in kg" required>
+  <!-- Farmer Section -->
+  <div class="card">
+    <h2>Farmer Information</h2>
 
-    <select id="status">
-      <option value="available">Available</option>
-      <option value="sold">Sold</option>
+    <input list="farmerList" id="farmerName" placeholder="Start typing farmer name..." />
+    <datalist id="farmerList"></datalist>
+
+    <select id="region">
+      <option value="">Select Region</option>
+      <option>Guji Uraga</option>
+      <option>Guji Dimtu</option>
+      <option>Yirgacheffe</option>
+      <option>Sidama</option>
     </select>
 
-    <input type="text" id="image" placeholder="Image URL (later from Firebase Storage)">
+    <select id="village">
+      <option value="">Select Village</option>
+    </select>
 
-    <button type="submit">Add Microlot</button>
-  </form>
+    <input type="number" id="altitude" placeholder="Altitude" />
+    <textarea id="story" placeholder="Farmer Story"></textarea>
 
-  <p id="success-msg" style="margin-top:20px;"></p>
+    <label>Upload 4 Farmer Images</label>
+    <input type="file" id="images" multiple accept="image/*" />
+  </div>
 
-  <!-- Firebase + Firestore -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  <!-- Lot Section -->
+  <div class="card">
+    <h2>Microlot Information</h2>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
-      authDomain: "ellidun-microlot-coffee.firebaseapp.com",
-      projectId: "ellidun-microlot-coffee",
-      storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
-      messagingSenderId: "286011718104",
-      appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
-    };
-    
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    <input type="text" id="lotId" placeholder="Lot ID"/>
+    <input type="text" id="process" placeholder="Process"/>
+    <input type="text" id="cupping" placeholder="Cupping Notes"/>
+    <input type="number" id="score" placeholder="Score"/>
+    <input type="number" id="quantity" placeholder="Quantity (kg)"/>
+    <input type="number" id="price" placeholder="Price per kg"/>
 
-    const form = document.getElementById('lot-form');
-    const msg = document.getElementById('success-msg');
+    <button id="saveBtn">Save Microlot</button>
+  </div>
+</section>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      await addDoc(collection(db, "microlots"), {
-        farm: form.farm.value,
-        process: form.process.value,
-        cupping: form.cupping.value,
-        price: form.price.value,
-        quantity: form.quantity.value,
-        status: form.status.value,
-        image: form.image.value,
-        createdAt: new Date()
-      });
-
-      msg.innerText = "✅ Microlot added successfully!";
-      form.reset();
-    });
-  </script>
-
+<script type="module" src="lotadmin.js"></script>
 </body>
 </html>
