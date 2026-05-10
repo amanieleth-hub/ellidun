@@ -260,7 +260,6 @@ document.getElementById("loadFarmerBtn").addEventListener("click", async () => {
 
   if (!search) { showToast("Enter a farmer name to search", "error"); return; }
 
-  // Find matching farmer (name is stored uppercase)
   const snap = await getDocs(collection(db, "farmers"));
   let farmerDoc = null;
   snap.forEach(d => {
@@ -284,7 +283,7 @@ document.getElementById("loadFarmerBtn").addEventListener("click", async () => {
   document.getElementById("ef_enviromental").value   = data.enviromental || "";
   document.getElementById("ef_story").value          = data.story || "";
 
-  // Show existing images
+  // Existing images
   const existingDiv = document.getElementById("ef_existingImages");
   existingDiv.innerHTML = "";
   if (data.images && data.images.length) {
@@ -311,22 +310,29 @@ document.getElementById("updateFarmerBtn").addEventListener("click", async () =>
     { id: "ef_village",    label: "Village" },
     { id: "ef_story",      label: "Farmer Story" },
   ];
-  if (!validateFields(required)) { showToast("Please fill in all required fields", "error"); return; }
+  if (!validateFields(required)) {
+    showToast("Please fill in all required fields", "error");
+    return;
+  }
 
   const btn = document.getElementById("updateFarmerBtn");
-  btn.disabled = true; btn.textContent = "Updating…";
+  btn.disabled = true;
+  btn.textContent = "Updating…";
 
   try {
     const farmerId   = document.getElementById("ef_farmerId").value;
     const imageFiles = document.getElementById("ef_farmerImages").files;
 
-    // If new images selected → upload and replace; else keep existing
     let imageUrls;
     if (imageFiles.length > 0) {
-      if (imageFiles.length > 4) { showToast("Max 4 images allowed", "error"); btn.disabled = false; btn.textContent = "💾 Update Farmer"; return; }
+      if (imageFiles.length > 4) {
+        showToast("Max 4 images allowed", "error");
+        btn.disabled = false;
+        btn.textContent = "💾 Update Farmer";
+        return;
+      }
       imageUrls = await uploadImages(imageFiles, farmerId);
     } else {
-      // keep whatever is stored
       const snap = await getDoc(doc(db, "farmers", farmerId));
       imageUrls  = snap.exists() ? (snap.data().images || []) : [];
     }
@@ -349,78 +355,62 @@ document.getElementById("updateFarmerBtn").addEventListener("click", async () =>
     }, { merge: true });
 
     showToast("✅ Farmer updated successfully!");
+    document.getElementById("ef_farmerImages").value = "";
+    document.getElementById("ef_imagePreview").innerHTML = "";
+
   } catch (err) {
     console.error(err);
     showToast("❌ " + err.message, "error");
   } finally {
-    btn.disabled = false; btn.textContent = "💾 Update Farmer";
+    btn.disabled = false;
+    btn.textContent = "💾 Update Farmer";
   }
 });
+
 
 // ════════════════════════════════════════════════════════════════════════════
 // TAB 4 — EDIT MICROLOT
 // ════════════════════════════════════════════════════════════════════════════
 document.getElementById("loadLotBtn").addEventListener("click", async () => {
-  const search   = document.getElementById("editLotSearch").value.trim();
+  const lotId = document.getElementById("editLotSearch").value.trim();
   const notFound = document.getElementById("editLotNotFound");
-  const fields   = document.getElementById("editLotFields");
+  const fields = document.getElementById("editLotFields");
   notFound.classList.add("hidden");
   fields.classList.add("hidden");
 
-  if (!search) { showToast("Enter a Lot ID to search", "error"); return; }
-
-  // Query microlot collection for matching lotId
-  const q    = query(collection(db, "microlot"), where("lotId", "==", search));
+  const q = query(collection(db, "microlot"), where("lotId", "==", lotId));
   const snap = await getDocs(q);
 
   if (snap.empty) { notFound.classList.remove("hidden"); return; }
 
-  const lotDoc = snap.docs[0];
-  const data   = lotDoc.data();
+  const docSnap = snap.docs[0];
+  const data = docSnap.data();
 
-  document.getElementById("el_docId").value      = lotDoc.id;
-  document.getElementById("el_lotId").value      = data.lotId || "";
-  document.getElementById("el_farmerName").value = data.farmerName || data.farmerId || "";
-  document.getElementById("el_process").value    = data.process || "";
-  document.getElementById("el_cupping").value    = data.cupping || "";
-  document.getElementById("el_score").value      = data.score || "";
-  document.getElementById("el_quantity").value   = data.quantity || "";
-  document.getElementById("el_price").value      = data.price || "";
-  document.getElementById("el_status").value     = data.status || "available";
+  document.getElementById("el_docId").value = docSnap.id;
+  document.getElementById("el_lotId").value = data.lotId;
+  document.getElementById("el_farmerName").value = data.farmerName;
+  document.getElementById("el_process").value = data.process;
+  document.getElementById("el_cupping").value = data.cupping;
+  document.getElementById("el_score").value = data.score;
+  document.getElementById("el_quantity").value = data.quantity;
+  document.getElementById("el_price").value = data.price;
+  document.getElementById("el_status").value = data.status;
 
   fields.classList.remove("hidden");
-  fields.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 document.getElementById("updateLotBtn").addEventListener("click", async () => {
-  const required = [
-    { id: "el_quantity", label: "Quantity" },
-    { id: "el_price",    label: "Price" },
-    { id: "el_status",   label: "Status" },
-  ];
-  if (!validateFields(required)) { showToast("Please fill in all required fields", "error"); return; }
+  const docId = document.getElementById("el_docId").value;
 
-  const btn = document.getElementById("updateLotBtn");
-  btn.disabled = true; btn.textContent = "Updating…";
+  await updateDoc(doc(db, "microlot", docId), {
+    process:  document.getElementById("el_process").value.trim(),
+    cupping:  document.getElementById("el_cupping").value.trim(),
+    score:    Number(document.getElementById("el_score").value),
+    quantity: Number(document.getElementById("el_quantity").value),
+    price:    Number(document.getElementById("el_price").value),
+    status:   document.getElementById("el_status").value,
+    updatedAt: new Date().toISOString(),
+  });
 
-  try {
-    const docId = document.getElementById("el_docId").value;
-
-    await updateDoc(doc(db, "microlot", docId), {
-      process:   document.getElementById("el_process").value.trim(),
-      cupping:   document.getElementById("el_cupping").value.trim(),
-      score:     Number(document.getElementById("el_score").value),
-      quantity:  Number(document.getElementById("el_quantity").value),
-      price:     Number(document.getElementById("el_price").value),
-      status:    document.getElementById("el_status").value,
-      updatedAt: new Date().toISOString(),
-    });
-
-    showToast("✅ Microlot updated successfully!");
-  } catch (err) {
-    console.error(err);
-    showToast("❌ " + err.message, "error");
-  } finally {
-    btn.disabled = false; btn.textContent = "💾 Update Microlot";
-  }
+  showToast("✅ Microlot updated!");
 });
