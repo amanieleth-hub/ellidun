@@ -6,11 +6,12 @@ import {
 
 // ── Firebase config ───────────────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey: "AIzaSyHKN...",
+  authDomain: "ellidun-microlot-coffee.firebaseapp.com",
+  projectId: "ellidun-microlot-coffee",
+  storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
+  messagingSenderId: "286011718104",
+  appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
 };
 
 // ── Cloudinary config ─────────────────────────────────────────────────────
