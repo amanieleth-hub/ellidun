@@ -425,120 +425,108 @@ document.getElementById("updateLotBtn").addEventListener("click", async () => {
     btn.disabled = false; btn.textContent = "💾 Update Microlot";
   }
 });
+// ═══════════════════════════════════════════════════════════════
+// TAB 5 — LOAD JSON INTO FORM (CORRECT FOR YOUR HTML)
+// ═══════════════════════════════════════════════════════════════
 
-// ════════════════════════════════════════════════════════════════════════════
-// TAB 5 — IMPORT JSON
-// ════════════════════════════════════════════════════════════════════════════
+let jsonFarmers = [];
+let currentJsonIndex = 0;
 
-let parsedFarmers = [];
-
-document.getElementById("parseJsonBtn").addEventListener("click", () => {
-  const fileInput = document.getElementById("jsonFile");
-  const file      = fileInput.files[0];
-
+document.getElementById("loadJsonBtn").addEventListener("click", () => {
+  const file = document.getElementById("jsonFile").files[0];
   if (!file) {
     showToast("Please select a JSON file", "error");
     return;
   }
 
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = e => {
     try {
-      const content = e.target.result;
-      const data    = JSON.parse(content);
+      const data = JSON.parse(e.target.result);
+      jsonFarmers = Array.isArray(data) ? data : [data];
+      currentJsonIndex = 0;
 
-      // Handle both array and single object
-      parsedFarmers = Array.isArray(data) ? data : [data];
-
-      if (parsedFarmers.length === 0) {
-        showToast("No valid farmer records found", "error");
+      if (!jsonFarmers.length) {
+        showToast("No farmers found in JSON", "error");
         return;
       }
 
-      // Show preview
-      showJsonPreview(parsedFarmers);
-      showToast(`✅ Parsed ${parsedFarmers.length} farmer(s)`, "success");
+      document.getElementById("jsonFarmerForm").classList.remove("hidden");
+      document.getElementById("farmerCounter").classList.remove("hidden");
+      document.getElementById("totalFarmers").textContent = jsonFarmers.length;
 
-      // Enable import button
-      document.getElementById("importJsonBtn").disabled = false;
-
+      loadJsonFarmerToForm();
+      showToast(`Loaded ${jsonFarmers.length} farmers from JSON`);
     } catch (err) {
-      showToast("❌ Invalid JSON: " + err.message, "error");
-      parsedFarmers = [];
+      showToast("Invalid JSON file", "error");
     }
   };
   reader.readAsText(file);
 });
 
-function showJsonPreview(farmers) {
-  const preview     = document.getElementById("jsonPreview");
-  const count       = document.getElementById("previewCount");
-  const list        = document.getElementById("previewList");
-  
-  count.textContent = farmers.length;
-  list.innerHTML    = "";
+function loadJsonFarmerToForm() {
+  const f = jsonFarmers[currentJsonIndex];
 
-  farmers.forEach(f => {
-    const item = document.createElement("div");
-    item.className = "preview-item";
-    item.innerHTML = `
-      <div>
-        <div class="preview-item-name">${f.name || f.document_id || "Unnamed"}</div>
-        <div class="preview-item-meta">${f.region || "—"} • ${f.village || "—"}</div>
-      </div>
-      <span class="preview-item-status">Ready</span>
-    `;
-    list.appendChild(item);
-  });
+  document.getElementById("currentIndex").textContent = currentJsonIndex + 1;
 
-  preview.classList.remove("hidden");
+  document.getElementById("json_name").value           = f.name || "";
+  document.getElementById("json_mothername").value     = f.mothername || "";
+  document.getElementById("json_spousename").value     = f.spousename || "";
+  document.getElementById("json_age").value            = f.age || "";
+  document.getElementById("json_altitude").value       = f.altitude || "";
+  document.getElementById("json_landsize").value       = f.landsize || "";
+  document.getElementById("json_numbersofchild").value = f.numbersofchild || "";
+  document.getElementById("json_region").value         = f.region || "";
+  document.getElementById("json_village").value        = f.village || "";
+  document.getElementById("json_plantationarea").value = f.plantationarea || "";
+  document.getElementById("json_enviromental").value   = f.enviromental || "";
+  document.getElementById("json_story").value          = f.story || "";
+  document.getElementById("json_documentId").value     =
+    (f.document_id || f.name || "").toLowerCase().replace(/\s+/g, "");
 }
 
-document.getElementById("importJsonBtn").addEventListener("click", async () => {
-  if (parsedFarmers.length === 0) {
-    showToast("No farmers to import", "error");
-    return;
+document.getElementById("nextFarmerBtn").addEventListener("click", () => {
+  if (currentJsonIndex < jsonFarmers.length - 1) {
+    currentJsonIndex++;
+    loadJsonFarmerToForm();
   }
+});
 
-  const btn = document.getElementById("importJsonBtn");
-  btn.disabled = true;
-  btn.textContent = "Importing…";
+document.getElementById("prevFarmerBtn").addEventListener("click", () => {
+  if (currentJsonIndex > 0) {
+    currentJsonIndex--;
+    loadJsonFarmerToForm();
+  }
+});
 
-  let imported = 0;
-  let failed   = 0;
+// Save this JSON farmer to Firestore
+document.getElementById("saveJsonFarmerBtn").addEventListener("click", async () => {
+  const name = formatFarmerName(document.getElementById("json_name").value);
+  const farmerId = toFarmerId(name);
 
-  for (const f of parsedFarmers) {
-    try {
-      // Use document_id as the ID, or derive from name
-      const docId = (f.document_id || f.name || "").toLowerCase().replace(/\s+/g, "_");
-      
-      if (!docId) {
-        failed++;
-        continue;
-      }
+  try {
+    await setDoc(doc(db, "farmers", farmerId), {
+      name,
+      mothername:     toTitleCase(document.getElementById("json_mothername").value),
+      spousename:     toTitleCase(document.getElementById("json_spousename").value),
+      age:            Number(document.getElementById("json_age").value),
+      altitude:       Number(document.getElementById("json_altitude").value),
+      landsize:       Number(document.getElementById("json_landsize").value),
+      numbersofchild: Number(document.getElementById("json_numbersofchild").value),
+      region:         document.getElementById("json_region").value,
+      village:        document.getElementById("json_village").value,
+      plantationarea: document.getElementById("json_plantationarea").value,
+      enviromental:   document.getElementById("json_enviromental").value,
+      story:          document.getElementById("json_story").value,
+      images:         [],
+      updatedAt:      new Date().toISOString(),
+    }, { merge: true });
 
-      // Format names
-      const name = f.name ? formatFarmerName(f.name) : "";
-      const mothername = f.mothername ? toTitleCase(f.mothername) : "";
-      const spousename = f.spousename ? toTitleCase(f.spousename) : "";
-
-      // Save to Firestore
-      await setDoc(doc(db, "farmers", docId), {
-        name,
-        mothername,
-        spousename,
-        age:             Number(f.age) || 0,
-        altitude:        Number(f.altitude) || 0,
-        landsize:        Number(f.landsize) || 0,
-        numbersofchild:  Number(f.numbersofchild) || 0,
-        region:          f.region || "",
-        village:         f.village || "",
-        plantationarea:  f.plantationarea || "",
-        enviromental:    f.enviromental || "",
-        story:           f.story || "",
-        images:          f.images || [],  // If JSON has image URLs
-        updatedAt:       new Date().toISOString(),
-      }, { merge: true });
+    showToast("Farmer saved from JSON ✅");
+  } catch (err) {
+    showToast(err.message, "error");
+  }
+});
 
       imported++;
     } catch (err) {
