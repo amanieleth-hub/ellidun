@@ -533,14 +533,3 @@ document.getElementById("saveJsonFarmerBtn").addEventListener("click", async () 
       console.error("Failed to import farmer:", f.name, err);
       failed++;
     }
-  }
-
-  showToast(`✅ Imported ${imported} farmer(s)${failed ? ` | ${failed} failed` : ""}`);
-  
-  // Reset
-  document.getElementById("jsonFile").value = "";
-  parsedFarmers = [];
-  document.getElementById("jsonPreview").classList.add("hidden");
-  btn.disabled = true;
-  btn.textContent = "⬆️ Import All";
-});
