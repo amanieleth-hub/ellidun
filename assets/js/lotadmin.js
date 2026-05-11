@@ -527,9 +527,3 @@ document.getElementById("saveJsonFarmerBtn").addEventListener("click", async () 
     showToast(err.message, "error");
   }
 });
-
-      imported++;
-    } catch (err) {
-      console.error("Failed to import farmer:", f.name, err);
-      failed++;
-    }
