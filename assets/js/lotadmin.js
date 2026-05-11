@@ -6,7 +6,7 @@ import {
 
 // ── Firebase config ───────────────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey: "AIzaSyHKN...",
+  apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
   authDomain: "ellidun-microlot-coffee.firebaseapp.com",
   projectId: "ellidun-microlot-coffee",
   storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
