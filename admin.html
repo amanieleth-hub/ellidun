@@ -28,6 +28,7 @@
   <button class="tab-btn"        data-tab="addMicrolot">＋ Add Microlot</button>
   <button class="tab-btn"        data-tab="editFarmer">✎ Edit Farmer</button>
   <button class="tab-btn"        data-tab="editMicrolot">✎ Edit Microlot</button>
+  <button class="tab-btn"        data-tab="importJSON">📥 Import JSON</button>
 </nav>
 
 <main class="admin-container">
@@ -302,6 +303,106 @@
         <div class="card-footer full">
           <button class="btn btn-rose" id="updateLotBtn">💾 Update Microlot</button>
         </div>
+      </div>
+    </div>
+  </section>
+  <!-- ═══ TAB 5 — IMPORT JSON ════════════════════════════════════════════ -->
+  <section class="tab-panel" id="tab-importJSON">
+    <div class="card">
+      <div class="card-header purple">
+        <span class="card-icon">📥</span>
+        <h2>Import Farmers from JSON</h2>
+      </div>
+      <div class="import-content">
+        <p class="import-info">Upload a JSON file to auto-fill the form below. Review and edit any fields, add images, then save to Firestore. Each farmer must have <code>document_id</code> or <code>name</code> field.</p>
+        
+        <div class="form-grid">
+          <div class="field full">
+            <label>Select JSON File</label>
+            <input type="file" id="jsonFile" accept=".json" class="file-input"/>
+          </div>
+          <div class="field full">
+            <button class="btn btn-purple" id="loadJsonBtn">📂 Load JSON into Form</button>
+          </div>
+        </div>
+
+        <!-- Counter -->
+        <div id="farmerCounter" class="farmer-counter hidden">
+          <span>Farmer <strong id="currentIndex">1</strong> of <strong id="totalFarmers">1</strong></span>
+          <div class="counter-nav">
+            <button id="prevFarmerBtn" class="btn-nav" disabled>← Prev</button>
+            <button id="nextFarmerBtn" class="btn-nav">Next →</button>
+          </div>
+        </div>
+
+        <!-- Editable form (same as Add Farmer) -->
+        <div id="jsonFarmerForm" class="form-grid hidden">
+          <div class="field full">
+            <label>Farmer Full Name <span class="req">*</span></label>
+            <input id="json_name" placeholder="JOHN SMITH" class="uppercase"/>
+          </div>
+          <div class="field">
+            <label>Mother's Name <span class="req">*</span></label>
+            <input id="json_mothername" placeholder="Jane Smith" class="titlecase"/>
+          </div>
+          <div class="field">
+            <label>Spouse Name</label>
+            <input id="json_spousename" placeholder="Jane Smith" class="titlecase"/>
+          </div>
+          <div class="field">
+            <label>Age <span class="req">*</span></label>
+            <input type="number" id="json_age" placeholder="35" min="18" max="100"/>
+          </div>
+          <div class="field">
+            <label>Altitude (m)</label>
+            <input type="number" id="json_altitude" placeholder="1800"/>
+          </div>
+          <div class="field">
+            <label>Land Size (ha)</label>
+            <input type="number" id="json_landsize" placeholder="2.5" step="0.1"/>
+          </div>
+          <div class="field">
+            <label>No. of Children</label>
+            <input type="number" id="json_numbersofchild" placeholder="3" min="0"/>
+          </div>
+          <div class="field">
+            <label>Region <span class="req">*</span></label>
+            <select id="json_region">
+              <option value="">Select Region</option>
+              <option>Guji Uraga</option>
+              <option>Guji Dimtu</option>
+              <option>Yirgacheffe</option>
+              <option>Sidama</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Village <span class="req">*</span></label>
+            <input id="json_village" placeholder="Village name"/>
+          </div>
+          <div class="field full">
+            <label>Plantation Areas</label>
+            <input id="json_plantationarea" placeholder="Plot names or coordinates"/>
+          </div>
+          <div class="field full">
+            <label>Environmental Practices</label>
+            <textarea id="json_enviromental" placeholder="Shade grown, organic, water conservation…" rows="3"></textarea>
+          </div>
+          <div class="field full">
+            <label>Farmer Story <span class="req">*</span></label>
+            <textarea id="json_story" placeholder="Tell the farmer's story…" rows="4"></textarea>
+          </div>
+          <div class="field full">
+            <label>Farmer Images <span class="hint">(max 4 photos)</span></label>
+            <input type="file" id="json_farmerImages" multiple accept="image/*" class="file-input"/>
+            <div id="json_imagePreview" class="preview-grid"></div>
+          </div>
+          <input type="hidden" id="json_documentId"/>
+
+          <div class="card-footer full">
+            <button class="btn btn-purple" id="saveJsonFarmerBtn">💾 Save This Farmer to Database</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
