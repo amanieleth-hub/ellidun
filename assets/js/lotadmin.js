@@ -14,10 +14,9 @@ const firebaseConfig = {
   appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
 };
 
-// ── Cloudinary config ─────────────────────────────────────────────────────
-const CLOUDINARY_CLOUD_NAME    = "your_cloud_name";
-const CLOUDINARY_UPLOAD_PRESET = "your_upload_preset";
-
+// Upload images
+const CLOUDINARY_CLOUD_NAME = "devkhvfvq";   // from Cloudinary dashboard
+const CLOUDINARY_UPLOAD_PRESET = "farmersimages"; // the unsigned preset you created
 // ── Init ──────────────────────────────────────────────────────────────────
 const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
