@@ -43,7 +43,7 @@ async function loadFarmer() {
     <p><strong>Plantation Area:</strong> ${f.plantationarea}</p>
     <p><strong>Environmental Practice:</strong> ${f.enviromental}</p>
   `;
-
+  
   // GALLERY
   document.getElementById("img0").src = f.images[0];
   document.getElementById("img2").src = f.images[2];
@@ -51,6 +51,18 @@ async function loadFarmer() {
 
   loadLots();
 }
+
+card.innerHTML = `
+  <img src="${farmer.images[0]}" alt="${farmer.name}">
+  <div class="farm-info">
+    <h3>${farmer.name} Farm</h3>
+    <p>${farmer.region} • ${farmer.altitude}m</p>
+
+    <canvas id="radar-${id}" class="mini-radar"></canvas>
+
+    <span class="view-story">View Story</span>
+  </div>
+`;
 
 async function loadLots(){
   const q = query(
@@ -74,5 +86,40 @@ async function loadLots(){
     `;
   });
 }
+function buildRadar(canvasId, f){
+  const ctx = document.getElementById(canvasId);
 
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Aroma','Flavor','Aftertaste','Acidity','Body','Balance','Sweetness'],
+      datasets: [{
+        data: [
+          f.fattyacid || 6,
+          f.flavor || 6,
+          f.aftertaste || 6,
+          f.acidity || 6,
+          f.body || 6,
+          f.balance || 6,
+          f.sweetness || 6
+        ],
+        fill: true,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }},
+      scales: {
+        r: {
+          min: 0,
+          max: 10,
+          ticks: { display: false },
+          pointLabels: { display: false },
+          grid: { circular: true }
+        }
+      }
+    }
+  });
+}
 loadFarmer();
