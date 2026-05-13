@@ -1,6 +1,6 @@
 // Firebase imports
-import { db } from "./firebase.js";import {
-  getFirestore,
+import { db } from "assets/js/firebase.js";
+import {getFirestore,
   collection,
   getDocs,
   query,
