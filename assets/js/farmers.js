@@ -2,10 +2,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   getFirestore,
   collection,
-  getDocs
+  getDocs,
+  query,
+  where,
+  limit
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-console.log("farmers.js loaded");
 
 const firebaseConfig = {
   apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
@@ -16,33 +17,46 @@ const firebaseConfig = {
   appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
 };
 
-const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
 
-const grid = document.getElementById("farmersGrid");
+    // LOT COUNT
+    const lotsSnap = await getDocs(
+      query(collection(db,"microlot"), where("status","==","available"))
+    );
+    document.getElementById("lotsCount").innerText = lotsSnap.size;
 
-function createCard(id, farmer){
-  const card = document.createElement("a");
-  card.className = "farm-card reveal";
-  card.href = `farmer.html?id=${id}`;
+    // HOME FARMERS
+    const container = document.getElementById("homeFarmers");
+    container.innerHTML = "<p style='padding:20px'>Loading farmers...</p>";
 
-  card.innerHTML = `
-    <img src="${farmer.images?.[0] || 'assets/images/placeholder.jpg'}" alt="${farmer.name}">
-    <div class="farm-info">
-      <h3>${farmer.name} Farm</h3>
-      <p>${farmer.region} • ${farmer.altitude}m</p>
-      <span class="view-story">View Story</span>
-    </div>
-  `;
+    const farmersSnap = await getDocs(
+      query(collection(db,"farmers"), limit(3))
+    );
 
-  grid.appendChild(card);
-}
+    container.innerHTML = "";
 
-async function loadFarmers(){
-  const snap = await getDocs(collection(db,"farmers"));
-  snap.forEach(doc=>{
-    createCard(doc.id, doc.data());
-  });
-}
+    farmersSnap.forEach(doc=>{
+      const f = doc.data();
 
-loadFarmers();
+      const card = document.createElement("div");
+      card.className = "farm-card";
+
+      card.innerHTML = `
+        <img src="${f.images?.[0] || 'assets/images/placeholder.jpg'}">
+        <div class="farm-info">
+          <h3>${f.name} Farm</h3>
+          <p>${f.region} • ${f.altitude}m</p>
+          <a href="farmer.html?id=${doc.id}" class="more-btn">View Story</a>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error("Home load error:", err);
+  }
+});
