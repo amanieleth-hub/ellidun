@@ -55,8 +55,8 @@ function createRow(lot, farmer) {
     <td>${lot.lotId || "-"}</td>
 
     <td>
-      <a class="farm-link" href="farmers/${farmerName.toLowerCase().replace(/\s/g,'')}.html">
-        ${farmerName}
+      <a class="farm-link" href="farmer.html?id=${lot.farmerId}">
+  ${farmerName}
       </a>
     </td>
 
