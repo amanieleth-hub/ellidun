@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { db } from "assets/js/firebase.js";
 import {
   getFirestore, collection, getDocs, getDoc,
   doc, setDoc, addDoc, updateDoc, query, where
@@ -17,9 +17,7 @@ const firebaseConfig = {
 // Upload images
 const CLOUDINARY_CLOUD_NAME = "devkhvfvq";   // from Cloudinary dashboard
 const CLOUDINARY_UPLOAD_PRESET = "farmersimages"; // the unsigned preset you created
-// ── Init ──────────────────────────────────────────────────────────────────
-const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
+
 
 // ════════════════════════════════════════════════════════════════════════════
 // HELPERS
