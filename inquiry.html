@@ -94,7 +94,21 @@
 
     <textarea rows="5" placeholder="Tell us what you are looking for (samples, full lots, origins, volume)"
       style="padding:14px; border:1px solid #d8cec2; font-family:Inter;"></textarea>
+    <!-- LOT CHECK SECTION -->
+    <div style="border:1px solid #e6ded2; padding:20px; border-radius:8px; background:#fffdf9;">
 
+       <label style="font-weight:600;">Enter Lot ID from Microlots</label>
+
+       <div style="display:flex; gap:10px; margin-top:8px;">
+          <input type="text" id="lotInput" placeholder="e.g. GERA741" 
+            style="flex:1; padding:12px; border:1px solid #d8cec2;">
+          <button type="button" id="confirmLot" class="btn-brown">Confirm Lot</button>
+       </div>
+
+  <!-- GENERATED NOTE -->
+       <div id="lotNote" style="margin-top:18px; display:none; font-size:15px; line-height:1.7;"></div>
+
+    </div>
     <button type="submit" class="btn-brown" style="width:220px;">
       Send Inquiry
     </button>
@@ -114,14 +128,7 @@
 </section>
 
 
-<script>
-// Hamburger
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("navMenu");
-hamburger.onclick = () =>{
-  navMenu.classList.toggle("show");
-};
-</script>
+<script>   </script>
 
 </body>
 </html>
