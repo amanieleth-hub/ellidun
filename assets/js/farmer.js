@@ -1,16 +1,7 @@
-import { db } from "./firebase.js";import {
+import { db } from "assets/js/firebase.js";import {
   getFirestore, doc, getDoc,
   collection, query, where, getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
-  authDomain: "ellidun-microlot-coffee.firebaseapp.com",
-  projectId: "ellidun-microlot-coffee",
-  storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
-  messagingSenderId: "286011718104",
-  appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
-};
 
 // Get farmerId from URL
 const params = new URLSearchParams(window.location.search);
