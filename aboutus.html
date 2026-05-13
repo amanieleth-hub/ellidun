@@ -183,19 +183,10 @@
 
 <script src="script.js"></script>
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  const firebaseConfig = { apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
-  authDomain: "ellidun-microlot-coffee.firebaseapp.com",
-  projectId: "ellidun-microlot-coffee",
-  storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
-  messagingSenderId: "286011718104",
-  appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  const db = getFirestore(getApps()[0]);
 
   const teamGrid = document.getElementById("teamGrid");
 
@@ -205,7 +196,6 @@
 
     snap.forEach(doc => {
       const t = doc.data();
-
       teamGrid.innerHTML += `
         <div class="team-card office-vibe">
           <img src="${t.photo}" alt="${t.name}">
