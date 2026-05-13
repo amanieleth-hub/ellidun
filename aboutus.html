@@ -180,33 +180,8 @@
   </a>
 </section>
 
-
-<script src="script.js"></script>
 <script type="module">
-  import { getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-  const db = getFirestore(getApps()[0]);
-
-  const teamGrid = document.getElementById("teamGrid");
-
-  async function loadTeam() {
-    const q = query(collection(db, "team"), orderBy("order"));
-    const snap = await getDocs(q);
-
-    snap.forEach(doc => {
-      const t = doc.data();
-      teamGrid.innerHTML += `
-        <div class="team-card office-vibe">
-          <img src="${t.photo}" alt="${t.name}">
-          <h3>${t.name}</h3>
-          <h4>${t.role}</h4>
-          <p>${t.bio}</p>
-        </div>
-      `;
-    });
-  }
-
+  import { loadTeam } from "./team.js";
   loadTeam();
 </script>
 <script src="assets/js/script.js"></script>
