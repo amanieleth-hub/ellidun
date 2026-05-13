@@ -137,31 +137,15 @@
 
 
 <!-- ================= TEAM ================= -->
+<!-- ================= TEAM (DYNAMIC) ================= -->
 <section class="why-ellidun">
 
   <h2 class="section-title">Our Team</h2>
 
-  <div class="why-grid">
-
-    <div class="team-card">
-      <img src="images/team1.jpg" alt="Sourcing Team">
-      <h3>Sourcing Team</h3>
-      <p>On-ground experts traveling across Ethiopia to identify exceptional microlots.</p>
-    </div>
-
-    <div class="team-card">
-      <img src="images/team2.jpg" alt="Quality Control">
-      <h3>Quality Control</h3>
-      <p>Q-graders ensuring every lot meets specialty-grade standards (84+ SCA).</p>
-    </div>
-
-    <div class="team-card">
-      <img src="images/team3.jpg" alt="Export Operations">
-      <h3>Export Operations</h3>
-      <p>Managing logistics, shipping, and traceability from farm to port.</p>
-    </div>
-
+  <div class="why-grid" id="teamGrid">
+    <!-- Team cards injected here -->
   </div>
+
 </section>
 <!-- ================= TESTIMONIALS ================= -->
 <section class="why-ellidun">
@@ -197,5 +181,42 @@
 
 
 <script src="script.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = { apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
+  authDomain: "ellidun-microlot-coffee.firebaseapp.com",
+  projectId: "ellidun-microlot-coffee",
+  storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
+  messagingSenderId: "286011718104",
+  appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const teamGrid = document.getElementById("teamGrid");
+
+  async function loadTeam() {
+    const q = query(collection(db, "team"), orderBy("order"));
+    const snap = await getDocs(q);
+
+    snap.forEach(doc => {
+      const t = doc.data();
+
+      teamGrid.innerHTML += `
+        <div class="team-card office-vibe">
+          <img src="${t.photo}" alt="${t.name}">
+          <h3>${t.name}</h3>
+          <h4>${t.role}</h4>
+          <p>${t.bio}</p>
+        </div>
+      `;
+    });
+  }
+
+  loadTeam();
+</script>
 </body>
 </html>
