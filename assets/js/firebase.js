@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAHK...",
+  apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
   authDomain: "ellidun-microlot-coffee.firebaseapp.com",
   projectId: "ellidun-microlot-coffee",
   storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
