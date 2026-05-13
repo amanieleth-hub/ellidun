@@ -48,9 +48,13 @@ async function loadFarmer() {
   `;
   
   // GALLERY
-  document.getElementById("img0").src = f.images[0];
-  document.getElementById("img2").src = f.images[2];
-  document.getElementById("img3").src = f.images[3];
+  const imgs = f.images || [];
+
+  document.getElementById("hero").style.backgroundImage =
+    `url(${imgs[1] || imgs[0] || 'assets/images/placeholder.jpg'})`;
+  document.getElementById("img0").src = imgs[0] || 'assets/images/placeholder.jpg';
+  document.getElementById("img2").src = imgs[2] || 'assets/images/placeholder.jpg';
+  document.getElementById("img3").src = imgs[3] || 'assets/images/placeholder.jpg';
 
   loadLots();
 }
