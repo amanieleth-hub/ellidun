@@ -8,6 +8,8 @@ import {
   limit
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+console.log("home.js loaded");
+
 const firebaseConfig = {
   apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
   authDomain: "ellidun-microlot-coffee.firebaseapp.com",
