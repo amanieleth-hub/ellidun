@@ -1,8 +1,8 @@
 // ===============================
 // ELLIDUN INQUIRY SYSTEM
 // ===============================
-import { db } from "assets/js/firebase.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { db } from "./assets/js/firebase.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
 
