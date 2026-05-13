@@ -1,6 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { db } from "assets/js/firebase.js";
 import {
-  getFirestore,
   collection,
   getDocs,
   query,
@@ -8,28 +7,24 @@ import {
   limit
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
-  authDomain: "ellidun-microlot-coffee.firebaseapp.com",
-  projectId: "ellidun-microlot-coffee",
-  storageBucket: "ellidun-microlot-coffee.firebasestorage.app",
-  messagingSenderId: "286011718104",
-  appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
-};
-
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const app = initializeApp(firebaseConfig);
-    const db  = getFirestore(app);
 
     // LOT COUNT
     const lotsSnap = await getDocs(
       query(collection(db,"microlot"), where("status","==","available"))
     );
-    document.getElementById("lotsCount").innerText = lotsSnap.size;
+
+    const lotsCountEl = document.getElementById("lotsCount");
+    if (lotsCountEl) {
+      lotsCountEl.innerText = lotsSnap.size;
+    }
 
     // HOME FARMERS
     const container = document.getElementById("homeFarmers");
+
+    if (!container) return;
+
     container.innerHTML = "<p style='padding:20px'>Loading farmers...</p>";
 
     const farmersSnap = await getDocs(
@@ -38,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     container.innerHTML = "";
 
-    farmersSnap.forEach(doc=>{
+    farmersSnap.forEach(doc => {
       const f = doc.data();
 
       const card = document.createElement("div");
