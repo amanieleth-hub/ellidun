@@ -41,7 +41,7 @@
     </p>
 
     <div class="hero-buttons">
-      <a href="lots.html" class="btn-brown">Browse Available Lots</a>
+      <a href="microlot.html" class="btn-brown">Browse Available Lots</a>
       <a href="inquiry.html" class="btn-brown-outline">Request Sample</a>
     </div>
   </div>
@@ -56,38 +56,7 @@
 </section>
 
 <!-- FARMERS GLIMPSE -->
-<section class="farmers-glimpse">
-
-  <div class="farm-card">
-    <img src="assets/images/adsa.jpg">
-    <div class="farm-info">
-      <h3>Adugna Salo Farm</h3>
-      <p>Guji • 2100m</p>
-      <p>Floral • Citrus • Tea-like</p>
-      <a href="farmers/adsa.html" class="more-btn">More →</a>
-    </div>
-  </div>
-
-  <div class="farm-card">
-    <img src="assets/images/tage.jpg">
-    <div class="farm-info">
-      <h3>Tadele Gemede Farm</h3>
-      <p>Yirgacheffe • 1950m</p>
-      <p>Jasmine • Lemon • Honey</p>
-      <a href="farmers/tage.html" class="more-btn">More →</a>
-    </div>
-  </div>
-
-  <div class="farm-card">
-    <img src="assets/images/jidu.jpg">
-    <div class="farm-info">
-      <h3>Jilo Dube Farm</h3>
-      <p>Sidama • 2050m</p>
-      <p>Berry • Chocolate • Spice</p>
-      <a href="farmers/jidu.html" class="more-btn">More →</a>
-    </div>
-  </div>
-
+<section class="farmers-glimpse" id="homeFarmers">
   <div class="browse-all-wrap">
     <a href="farmers.html" class="browse-all-btn">Browse All Farmers</a>
   </div>
@@ -165,7 +134,7 @@
     </p>
 
     <div class="browse-all-wrap">
-      <a href="lots.html" class="browse-all-btn">Browse Microlots</a>
+      <a href="microlots.html" class="browse-all-btn">Browse Microlots</a>
     </div>
 
   </div>
@@ -175,10 +144,13 @@
 <section class="lots-teaser reveal">
   <div class="lots-image">
     <img src="assets/images/coffee-beans.jpg">
-    <a href="lots.html" class="lots-btn">Available Lots</a>
+    <a href="microlot.html" class="browse-all-btn">
+      <span id="lotsCount">0</span> Available Lots
+    </a>
   </div>
 </section>
 
+<script type="module" src="assets/js/home.js"></script>
 <script src="assets/js/script.js"></script>
 </body>
 </html>
