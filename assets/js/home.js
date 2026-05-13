@@ -8,8 +8,6 @@ import {
   limit
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-console.log("home.js loaded");
-
 const firebaseConfig = {
   apiKey: "AIzaSyAHKnemdl-A2p_dHK43LpwTAxmcAbyFZGk",
   authDomain: "ellidun-microlot-coffee.firebaseapp.com",
@@ -19,46 +17,46 @@ const firebaseConfig = {
   appId: "1:286011718104:web:bb4f4e018d28ffdb2c1aad"
 };
 
-const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
 
-// ------------------ LOT COUNT ------------------
-async function loadLotsCount(){
-  const q = query(
-    collection(db,"microlot"),
-    where("status","==","available")
-  );
+    // LOT COUNT
+    const lotsSnap = await getDocs(
+      query(collection(db,"microlot"), where("status","==","available"))
+    );
+    document.getElementById("lotsCount").innerText = lotsSnap.size;
 
-  const snap = await getDocs(q);
-  document.getElementById("lotsCount").innerText = snap.size;
-}
+    // HOME FARMERS
+    const container = document.getElementById("homeFarmers");
+    container.innerHTML = "<p style='padding:20px'>Loading farmers...</p>";
 
-// ------------------ 3 FARMERS ------------------
-async function loadHomeFarmers(){
-  const container = document.getElementById("homeFarmers");
+    const farmersSnap = await getDocs(
+      query(collection(db,"farmers"), limit(3))
+    );
 
-  const snap = await getDocs(
-    query(collection(db,"farmers"), limit(3))
-  );
+    container.innerHTML = "";
 
-  snap.forEach(doc=>{
-    const f = doc.data();
+    farmersSnap.forEach(doc=>{
+      const f = doc.data();
 
-    const card = document.createElement("div");
-    card.className = "farm-card";
+      const card = document.createElement("div");
+      card.className = "farm-card";
 
-    card.innerHTML = `
-      <img src="${f.images?.[0]}" alt="${f.name}">
-      <div class="farm-info">
-        <h3>${f.name} Farm</h3>
-        <p>${f.region} • ${f.altitude}m</p>
-        <a href="farmer.html?id=${doc.id}" class="more-btn">View Story</a>
-      </div>
-    `;
+      card.innerHTML = `
+        <img src="${f.images?.[0] || 'assets/images/placeholder.jpg'}">
+        <div class="farm-info">
+          <h3>${f.name} Farm</h3>
+          <p>${f.region} • ${f.altitude}m</p>
+          <a href="farmer.html?id=${doc.id}" class="more-btn">View Story</a>
+        </div>
+      `;
 
-    container.prepend(card);
-  });
-}
+      container.appendChild(card);
+    });
 
-loadLotsCount();
-loadHomeFarmers();
+  } catch (err) {
+    console.error("Home load error:", err);
+  }
+});
