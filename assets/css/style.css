@@ -84,7 +84,7 @@ section,
   position:relative;
   height:100vh;
   min-height:700px;
-  background:url('../assets/images/farmer.jpg') center center/cover no-repeat;
+  background:url('./assets/images/farmer.jpg') center center/cover no-repeat;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -229,7 +229,7 @@ section,
 /* IMAGE CONTROL (IMPORTANT FIX) */
 .farm-card img{
   width:200px;
-  height:250px;
+  height:300px;
   object-fit:cover;
   border-radius:8px;
   flex-shrink:0;
