@@ -550,6 +550,25 @@ section,
   color:#8b5e3c;
   margin-bottom:10px;
 }
+
+.farmer-hero{
+  height:75vh;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.farmer-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.45);
+}
+
 /* ================= MOBILE ================= */
 
 
