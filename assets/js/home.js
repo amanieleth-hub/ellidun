@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
 
       container.appendChild(card);
+      setTimeout(() => card.classList.add("show"), 100);
     });
 
   } catch (err) {
