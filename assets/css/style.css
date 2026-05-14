@@ -690,5 +690,15 @@ section,
     font-size:14px;
     line-height:1.6;
   }
+  /* ===== FARM CARDS MOBILE FIX ===== */
+  .farmers-glimpse,
+  #farmersGrid,
+  #homeFarmers{
+    grid-template-columns: 1fr !important;
+    gap:20px;
+  }
+  .farm-card img{
+    height:220px;
+  }
 }
 
