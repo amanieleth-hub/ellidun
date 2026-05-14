@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const farmer = doc.data();
 
       const card = document.createElement("a");
-      card.className = "farm-card reveal";
+      card.className = "farm-card";
 
       // IMPORTANT: correct routing (no farmer-name URLs)
       card.href = `farmer.html?id=${doc.id}`;
