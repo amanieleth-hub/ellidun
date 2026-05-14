@@ -84,7 +84,7 @@ section,
   position:relative;
   height:100vh;
   min-height:700px;
-  background:url('assets/images/farmer.jpg') center center/cover no-repeat;
+  background:url('../assets/images/farmer.jpg') center center/cover no-repeat;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
