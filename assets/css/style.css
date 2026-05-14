@@ -226,6 +226,39 @@ section,
   transform:translateY(-6px);
 }
 
+/* ===== FARM CARD GRID LAYOUT (DESKTOP) ===== */
+.farmers-glimpse,
+#farmersGrid,
+#homeFarmers{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:30px;
+}
+
+/* vertical card */
+.farm-card{
+  flex-direction:column;
+  align-items:flex-start;
+  height:100%;
+}
+
+/* bigger image */
+.farm-card img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+/* push text nicely */
+.farm-info{
+  padding:10px 4px;
+}
+
+.view-story{
+  margin-top:10px;
+}
+
 /* IMAGE CONTROL (IMPORTANT FIX) */
 .farm-card img{
   width:200px;
