@@ -206,7 +206,7 @@ section,
   align-items:center;
   background:#fffdf9;
   padding:18px;
-  border-radius:10px;
+  border-radius:5px;
   text-decoration:none;
   color:inherit;
 
@@ -228,8 +228,8 @@ section,
 
 /* IMAGE CONTROL (IMPORTANT FIX) */
 .farm-card img{
-  width:260px;
-  height:180px;
+  width:200px;
+  height:250px;
   object-fit:cover;
   border-radius:8px;
   flex-shrink:0;
