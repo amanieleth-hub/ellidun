@@ -226,23 +226,6 @@ section,
   transform:translateY(-6px);
 }
 
-/* notes column control */
-.microlots-table td:nth-child(6){
-  max-width:220px;
-  white-space:normal;
-  word-wrap:break-word;
-}
-
-/* scroll hint */
-.lots-table-wrapper::after{
-  content:"⇠ scroll ⇢";
-  display:block;
-  text-align:center;
-  font-size:12px;
-  opacity:.6;
-  padding-top:6px;
-}
-
 .team-hero{
   height:55vh;
   background-size:cover;
@@ -407,6 +390,15 @@ section,
   -webkit-overflow-scrolling: touch;
   padding-bottom: 10px;
 }
+/* scroll hint */
+.lots-table-wrapper::after{
+  content:"⇠ scroll ⇢";
+  display:block;
+  text-align:center;
+  font-size:12px;
+  opacity:.6;
+  padding-top:6px;
+}
 
 .lots-table {
   width: 100%;
@@ -489,7 +481,12 @@ section,
   font-size: 14px;
   vertical-align: middle;
 }
-
+/* notes column control */
+.microlots-table td:nth-child(6){
+  max-width:220px;
+  white-space:normal;
+  word-wrap:break-word;
+}
 .microlots-table tr:hover {
   background: #f6f1ea;
 }
