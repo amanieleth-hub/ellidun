@@ -18,4 +18,8 @@ export async function loadTeam() {
       </div>
     `;
   });
+  loadTeam();
 }
+
+
+  
