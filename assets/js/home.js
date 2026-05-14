@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="farm-info">
           <h3>${f.name} Farm</h3>
           <p>${f.region} • ${f.altitude}m</p>
-          <a href="farmer.html?id=${doc.id}" class="more-btn">View Story</a>
+          <a href="farmer.html?id=${doc.id}" class="view-story">View Story</a>
         </div>
       `;
 
