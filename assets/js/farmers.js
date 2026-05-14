@@ -1,4 +1,4 @@
-import { db } from "./assets/js/firebase.js";
+import { db } from "./firebase.js";
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
