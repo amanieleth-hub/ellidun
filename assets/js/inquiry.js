@@ -18,7 +18,6 @@ let generatedNoteText = "";
 function cleanLotId(input) {
   return input
     .replace(/[^a-zA-Z0-9]/g, "") // remove symbols/spaces
-    .toLowerCase();
 }
 
 // ===============================
@@ -55,7 +54,7 @@ document.getElementById("confirmLot").addEventListener("click", async () => {
   }
 
   try {
-    const ref = doc(db, "microlots", lotId);
+    const ref = doc(db, "microlot", lotId);
     const snap = await getDoc(ref);
 
     if (!snap.exists()) {
