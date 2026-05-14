@@ -84,7 +84,7 @@ section,
   position:relative;
   height:100vh;
   min-height:700px;
-  background:url('./assets/images/farmer.jpg') center center/cover no-repeat;
+  background:url('../assets/images/farmer.jpg') center center/cover no-repeat;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -224,6 +224,29 @@ section,
 
 .farm-card:hover{
   transform:translateY(-6px);
+}
+
+/* notes column control */
+.microlots-table td:nth-child(6){
+  max-width:220px;
+  white-space:normal;
+  word-wrap:break-word;
+}
+
+/* scroll hint */
+.lots-table-wrapper::after{
+  content:"⇠ scroll ⇢";
+  display:block;
+  text-align:center;
+  font-size:12px;
+  opacity:.6;
+  padding-top:6px;
+}
+
+.team-hero{
+  height:55vh;
+  background-size:cover;
+  background-position:center;
 }
 
 /* ===== FARM CARD GRID LAYOUT (DESKTOP) ===== */
