@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
 
       grid.appendChild(card);
+      setTimeout(() => card.classList.add("show"), 100);
     });
 
   } catch (err) {
