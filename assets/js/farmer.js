@@ -44,20 +44,8 @@ async function loadFarmer() {
   document.getElementById("img2").src = imgs[2] || 'assets/images/placeholder.jpg';
   document.getElementById("img3").src = imgs[3] || 'assets/images/placeholder.jpg';
 
-  loadLots();
+  loadFarmer();
 }
-
-card.innerHTML = `
-  <img src="${farmer.images[0]}" alt="${farmer.name}">
-  <div class="farm-info">
-    <h3>${farmer.name} Farm</h3>
-    <p>${farmer.region} • ${farmer.altitude}m</p>
-
-    <canvas id="radar-${id}" class="mini-radar"></canvas>
-
-    <span class="view-story">View Story</span>
-  </div>
-`;
 
 async function loadLots(){
   const q = query(
@@ -80,6 +68,7 @@ async function loadLots(){
       </div>
     `;
   });
+loadLots();
 }
 function buildRadar(canvasId, f){
   const ctx = document.getElementById(canvasId);
@@ -116,5 +105,6 @@ function buildRadar(canvasId, f){
       }
     }
   });
+buildRadar();
 }
-loadFarmer();
+
